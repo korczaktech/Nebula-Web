@@ -58,7 +58,15 @@ declaracao_bloco      = importacao_local
                       | declaracao_token
                       | declaracao_animacao
                       | declaracao_transicao
-                      | declaracao_consulta ;
+                      | declaracao_consulta
+                      | comando_condicional
+                      | comando_escolha
+                      | comando_para
+                      | comando_enquanto
+                      | comando_retorno
+                      | comando_tentar
+                      | comando_lancar
+                      | comando_controle ;
 
 importacao_local      = "importar", caminho_modulo,
                         [ "como", identificador ], ";" ;
@@ -72,7 +80,7 @@ modificador_visibilidade
                       = "publico" | "privado" | "protegido" ;
 anotacao_tipo         = ":", tipo ;
 declaracao_tipo       = "tipo", identificador, "=", tipo, ";" ;
-declaracao_funcao     = [ modificador_visibilidade ], "funcao",
+declaracao_funcao     = [ modificador_visibilidade ], [ "assinc" ], "funcao",
                         identificador, assinatura_funcao, bloco ;
 assinatura_funcao    = "(", [ lista_parametros ], ")",
                         [ ":", tipo ] ;
@@ -112,7 +120,23 @@ chamada_propriedade  = nome_qualificado,
                         "(", [ lista_argumentos ], ")", ";" ;
 declaracao_estilo_aninhado
                       = "estilo", "(", seletor, ")", bloco_estilo ;
-declaracao_consulta  = "consulta", "(", expressao_condicao, ")", bloco ;
+declaracao_consulta  = "consulta", "(", expressao, ")", bloco ;
+
+comando_condicional   = "se", "(", expressao, ")", bloco,
+                        [ "senao", ( bloco | comando_condicional ) ] ;
+comando_escolha       = "escolha", "(", expressao, ")", "{",
+                        { quebra | ramo_caso }, [ ramo_padrao ], "}" ;
+ramo_caso             = "caso", lista_expressoes, ":", bloco ;
+ramo_padrao           = "senao", ":", bloco ;
+lista_expressoes      = expressao, { ",", expressao } ;
+comando_para          = "para", "(", identificador, "em", expressao, ")", bloco ;
+comando_enquanto      = "enquanto", "(", expressao, ")", bloco ;
+comando_retorno       = "retorne", [ expressao ], ";" ;
+comando_tentar        = "tente", bloco,
+                        { "capturar", "(", [ parametro ], ")", bloco },
+                        [ "finalmente", bloco ] ;
+comando_lancar        = "lancar", expressao, ";" ;
+comando_controle      = "interromper", ";" | "continuar", ";" ;
 declaracao_animacao  = "animacao", identificador,
                         [ assinatura_funcao ], bloco ;
 declaracao_transicao = "transicao", identificador,
@@ -170,7 +194,7 @@ aditiva               = multiplicativa,
                         { ( "+" | "-" ), multiplicativa } ;
 multiplicativa        = unaria,
                         { ( "*" | "/" | "%" ), unaria } ;
-unaria                = [ "+" | "-" | "nao" | "&" ], posfixa ;
+unaria                = [ "+" | "-" | "nao" | "&" | "aguardar" ], posfixa ;
 posfixa               = primaria, { sufixo } ;
 sufixo                = acesso
                       | acesso_opcional
