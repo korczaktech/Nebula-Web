@@ -13,7 +13,7 @@
 
 ## Estado da especificação
 
-A Fase 1 consolidou os requisitos de produto e arquitetura. A entrevista técnica da Fase 2 também foi concluída, com 125 decisões registradas. A consolidação está em [`especificacao/NSL-FASE-2-DECISOES.md`](especificacao/NSL-FASE-2-DECISOES.md). A base de gramática está em [`especificacao/GRAMATICA-NSL-RASCUNHO.md`](especificacao/GRAMATICA-NSL-RASCUNHO.md) e permanece explicitamente não normativa até que os tokens e regras concretas sejam aprovados.
+A Fase 1 consolidou os requisitos de produto e arquitetura. A Fase 2 registrou 125 decisões técnicas em [`especificacao/NSL-FASE-2-DECISOES.md`](especificacao/NSL-FASE-2-DECISOES.md). A Fase 3 iniciou a formalização concreta: decisões lexicais e sintáticas estão em [`especificacao/NSL-FASE-3-LEXICO-E-SINTAXE.md`](especificacao/NSL-FASE-3-LEXICO-E-SINTAXE.md), a gramática EBNF inicial está em [`especificacao/GRAMATICA-NSL-FASE-3.md`](especificacao/GRAMATICA-NSL-FASE-3.md), e o corpus de conformidade planejado está em [`especificacao/testes/NSL-FASE-3-CORPUS-CONFORMIDADE.md`](especificacao/testes/NSL-FASE-3-CORPUS-CONFORMIDADE.md). Esses materiais permanecem rascunhos técnicos até revisão e execução dos testes em uma implementação de referência.
 
 As decisões representam requisitos, não funcionalidades implementadas. A versão 1.0 só poderá ser declarada estável após implementação verificável, testes de conformidade e atendimento aos critérios documentados.
 

@@ -165,3 +165,8 @@ Antes de promover este rascunho a gramática normativa:
 ## 11. Regra de status
 
 Até que os itens acima sejam concluídos e revisados, este arquivo deve permanecer identificado como **rascunho**. Não usar este documento isoladamente como contrato para implementar um parser definitivo.
+
+
+## Atualização da Fase 3
+
+Este documento permanece como base estrutural histórica. A formalização concreta inicial de tokens, palavras reservadas, blocos, expressões e declarações foi separada em [GRAMATICA-NSL-FASE-3.md](GRAMATICA-NSL-FASE-3.md), acompanhada pelo registro de decisões em [NSL-FASE-3-LEXICO-E-SINTAXE.md](NSL-FASE-3-LEXICO-E-SINTAXE.md). Este rascunho não deve ser usado isoladamente para implementar o parser.
