@@ -284,7 +284,49 @@ O lexer/layout validator emite tokens virtuais de quebra e nível de indentaçã
 - declarações simples exigem `;`;
 - bloco fecha exclusivamente com `}`.
 
-## 10. Pontos ainda não fechados
+## 10. Tokens lexicais
+
+Os itens abaixo são reconhecidos pelo lexer antes da análise sintática. Propriedades Unicode são consultadas na versão Unicode fixada pela versão NSL.
+
+```ebnf
+identificador         = caractere_inicio, { caractere_continuacao } ;
+caractere_inicio      = caractere_XID_Start ;
+caractere_continuacao = caractere_XID_Continue ;
+quebra                = "\\n" | "\\r\\n" | "\\r" ;
+digitos               = digito, { [ "_" ], digito } ;
+digitos_binarios      = digito_binario, { [ "_" ], digito_binario } ;
+digitos_octais        = digito_octal, { [ "_" ], digito_octal } ;
+digitos_hexadecimais  = digito_hexadecimal,
+                        { [ "_" ], digito_hexadecimal } ;
+digito                = "0" | "1" | "2" | "3" | "4"
+                      | "5" | "6" | "7" | "8" | "9" ;
+digito_binario        = "0" | "1" ;
+digito_octal          = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" ;
+digito_hexadecimal    = digito | "a" | "b" | "c" | "d" | "e" | "f"
+                      | "A" | "B" | "C" | "D" | "E" | "F" ;
+decimal_inteiro       = digitos ;
+string_simples        = "'", { caractere_string | escape_string }, "'" ;
+string_dupla          = '"', { caractere_string | escape_string }, '"' ;
+string_multilinha     = '"""', { caractere_multilinha | escape_string }, '"""' ;
+escape_string         = "\\\\", ( "'" | '"' | "\\\\" | "n" | "r" | "t"
+                      | "u{", digitos_hexadecimais, "}" ) ;
+comentario_linha      = "//", { caractere_sem_quebra } ;
+comentario_documentacao
+                      = "///", { caractere_sem_quebra } ;
+comentario_bloco      = "/*", { conteudo_bloco }, "*/" ;
+```
+
+Restrições lexicais:
+- `caractere_XID_Start` e `caractere_XID_Continue` são as propriedades Unicode correspondentes, excluindo controles, não-caracteres e caracteres proibidos pela política de segurança.
+- `caractere_string` admite qualquer escalar Unicode válido exceto a aspa delimitadora, barra invertida e quebra de linha não escapada.
+- `caractere_multilinha` admite quebras de linha, mas não a sequência delimitadora tripla não escapada.
+- `conteudo_bloco` admite caracteres comuns e comentários de bloco aninhados; o lexer mantém uma profundidade de aninhamento limitada por configuração.
+- `caractere_sem_quebra` exclui CR e LF.
+- `quebra` é token virtual de layout; o lexer preserva também os offsets e a indentação original.
+- Separadores numéricos não podem aparecer no início/fim, em duplicidade ou imediatamente antes/depois do ponto decimal ou expoente.
+- Identificadores são normalizados em NFC para comparação semântica, mas a grafia de origem é preservada.
+
+## 11. Pontos ainda não fechados
 
 Esta gramática ainda não especifica integralmente:
 - todas as declarações de temas, componentes, slots, variantes e estados;
