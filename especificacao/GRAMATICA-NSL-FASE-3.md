@@ -265,10 +265,6 @@ octal                 = "0o", digitos_octais ;
 hexadecimal           = "0x", digitos_hexadecimais ;
 comentario            = comentario_linha | comentario_bloco
                       | comentario_documentacao ;
-comentario_linha      = "//", { caractere_sem_quebra } ;
-comentario_bloco      = "/*", { conteudo_bloco }, "*/" ;
-comentario_documentacao
-                      = "///", { caractere_sem_quebra } ;
 ```
 
 O reconhecimento detalhado de escapes, interpolação, strings cruas, separadores numéricos e comentários aninhados pertence à especificação léxica. O lexer deverá produzir tokens de string segmentados para interpolação, sem misturar texto literal e expressão.
@@ -286,13 +282,20 @@ O lexer/layout validator emite tokens virtuais de quebra e nível de indentaçã
 
 ## 10. Tokens lexicais
 
-Os itens abaixo são reconhecidos pelo lexer antes da análise sintática. Propriedades Unicode são consultadas na versão Unicode fixada pela versão NSL.
+Os itens abaixo são reconhecidos pelo lexer antes da análise sintática. Os nomes em maiúsculas são classes de tokens internas, não texto digitado no arquivo.
 
 ```ebnf
 identificador         = caractere_inicio, { caractere_continuacao } ;
-caractere_inicio      = caractere_XID_Start ;
-caractere_continuacao = caractere_XID_Continue ;
-quebra                = "\\n" | "\\r\\n" | "\\r" ;
+caractere_inicio      = "_" | UNICODE_XID_START ;
+caractere_continuacao = "_" | UNICODE_XID_CONTINUE ;
+quebra                = TOKEN_QUEBRA ;
+string_simples        = TOKEN_STRING_SIMPLES ;
+string_dupla          = TOKEN_STRING_DUPLA ;
+string_multilinha     = TOKEN_STRING_MULTILINHA ;
+comentario_linha      = TOKEN_COMENTARIO_LINHA ;
+comentario_bloco      = TOKEN_COMENTARIO_BLOCO ;
+comentario_documentacao
+                      = TOKEN_COMENTARIO_DOCUMENTACAO ;
 digitos               = digito, { [ "_" ], digito } ;
 digitos_binarios      = digito_binario, { [ "_" ], digito_binario } ;
 digitos_octais        = digito_octal, { [ "_" ], digito_octal } ;
@@ -305,26 +308,17 @@ digito_octal          = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" ;
 digito_hexadecimal    = digito | "a" | "b" | "c" | "d" | "e" | "f"
                       | "A" | "B" | "C" | "D" | "E" | "F" ;
 decimal_inteiro       = digitos ;
-string_simples        = "'", { caractere_string | escape_string }, "'" ;
-string_dupla          = '"', { caractere_string | escape_string }, '"' ;
-string_multilinha     = '"""', { caractere_multilinha | escape_string }, '"""' ;
-escape_string         = "\\\\", ( "'" | '"' | "\\\\" | "n" | "r" | "t"
-                      | "u{", digitos_hexadecimais, "}" ) ;
-comentario_linha      = "//", { caractere_sem_quebra } ;
-comentario_documentacao
-                      = "///", { caractere_sem_quebra } ;
-comentario_bloco      = "/*", { conteudo_bloco }, "*/" ;
 ```
 
-Restrições lexicais:
-- `caractere_XID_Start` e `caractere_XID_Continue` são as propriedades Unicode correspondentes, excluindo controles, não-caracteres e caracteres proibidos pela política de segurança.
-- `caractere_string` admite qualquer escalar Unicode válido exceto a aspa delimitadora, barra invertida e quebra de linha não escapada.
-- `caractere_multilinha` admite quebras de linha, mas não a sequência delimitadora tripla não escapada.
-- `conteudo_bloco` admite caracteres comuns e comentários de bloco aninhados; o lexer mantém uma profundidade de aninhamento limitada por configuração.
-- `caractere_sem_quebra` exclui CR e LF.
-- `quebra` é token virtual de layout; o lexer preserva também os offsets e a indentação original.
+Contrato lexical:
+- `UNICODE_XID_START` e `UNICODE_XID_CONTINUE` representam as propriedades Unicode correspondentes na versão fixada pela versão NSL. Controles, não-caracteres e caracteres proibidos pela política de segurança são excluídos.
+- Identificadores são sensíveis a maiúsculas/minúsculas e comparados após normalização NFC; a grafia original é preservada para diagnósticos e source maps.
+- `TOKEN_STRING_SIMPLES`, `TOKEN_STRING_DUPLA` e `TOKEN_STRING_MULTILINHA` representam strings já balanceadas pelo lexer. Aspas simples e duplas aceitam escapes; strings multilinha aceitam quebras de linha.
+- Interpolação produz segmentos alternados de texto e expressão, preservando origem e tipo de cada segmento.
+- `TOKEN_COMENTARIO_BLOCO` reconhece comentários aninhados e limita profundidade para evitar consumo ilimitado.
+- `TOKEN_QUEBRA` preserva offsets, número da linha e indentação original; o validador de layout produz também níveis virtuais de indentação.
 - Separadores numéricos não podem aparecer no início/fim, em duplicidade ou imediatamente antes/depois do ponto decimal ou expoente.
-- Identificadores são normalizados em NFC para comparação semântica, mas a grafia de origem é preservada.
+- Literais numéricos são validados quanto a base, precisão, overflow e unidade durante as etapas léxica e semântica apropriadas.
 
 ## 11. Pontos ainda não fechados
 
