@@ -108,7 +108,7 @@ declaracao_visual     = chamada_propriedade
                       | declaracao_consulta
                       | declaracao_animacao
                       | declaracao_transicao ;
-chamada_propriedade  = identificador_qualificado,
+chamada_propriedade  = nome_qualificado,
                         "(", [ lista_argumentos ], ")", ";" ;
 declaracao_estilo_aninhado
                       = "estilo", "(", seletor, ")", bloco_estilo ;
@@ -181,7 +181,7 @@ acesso_opcional       = "?.", identificador ;
 chamada               = "(", [ lista_argumentos ], ")" ;
 indexacao             = "[", expressao, "]" ;
 primaria              = literal
-                      | identificador_qualificado
+                      | nome_qualificado
                       | agrupamento
                       | lista
                       | funcao_lambda ;
