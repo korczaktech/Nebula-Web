@@ -428,3 +428,11 @@ Este documento continua em rascunho até que:
 6. a revisão formal aprove a versão normativa.
 
 A existência deste documento não significa que lexer, parser, compilador ou runtime estejam implementados.
+
+
+## 17. Documentos relacionados
+
+- [Gramática EBNF da Fase 3](GRAMATICA-NSL-FASE-3.md).
+- [Corpus de conformidade da Fase 3](testes/NSL-FASE-3-CORPUS-CONFORMIDADE.md).
+
+A gramática foi verificada estaticamente quanto a referências não definidas e produções duplicadas. Essa verificação documental não substitui a execução do corpus por lexer/parser de referência.
