@@ -1,0 +1,5 @@
+# Configuração raiz reservada do Nebula-Web.
+# O formato definitivo será especificado antes de ser consumido pelas ferramentas.
+[projeto]
+nome = "Nebula-Web"
+versao = "0.1.0-dev"
