@@ -229,3 +229,8 @@ O repositório possui estrutura arquitetural inicial e documentação de requisi
 ## Contribuição
 
 Consulte [CONTRIBUTING.md](CONTRIBUTING.md) antes de alterar arquitetura, especificações ou código. Toda funcionalidade deverá incluir testes automatizados e documentação. Não declare suporte, implementação ou conformidade sem evidências reproduzíveis.
+
+
+### Decisão de sintaxe inicial de NML e NSL
+
+As decisões iniciais aprovadas para regiões opcionais e aninhamento em NML, declaração explícita de texto e seletores de classe/elemento em NSL estão documentadas em [0003 — Sintaxe inicial de NML e NSL](especificacao/decisoes-arquiteturais/0003-sintaxe-inicial-nml-nsl.md).
