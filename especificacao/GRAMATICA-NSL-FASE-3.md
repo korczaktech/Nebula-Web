@@ -525,8 +525,7 @@ combinador           = ESPACO_SELETOR | ">" | "+" | "~" ;
 bloco_estilo         = "{", { QUEBRA | declaracao_visual }, "}" ;
 declaracao_visual    = declaracao_valor | regra_estilo ;
 declaracao_valor     = IDENT, ":", valor_estilo, ";" ;
-valor_estilo         = literal | medida | referencia_token | lista_valores
-                     | chamada_valor | expressao ;
+valor_estilo         = expressao ;
 medida               = NUMERO, UNIDADE ;
 referencia_token     = "$", nome_qualificado ;
 lista_valores        = "[", [ valor_estilo, { ",", valor_estilo }, [ "," ] ], "]" ;
@@ -534,8 +533,8 @@ chamada_valor        = nome_qualificado, "(", [ lista_argumentos ], ")" ;
 lista_argumentos     = argumento, { ",", argumento } ;
 argumento            = [ IDENT, "=" ], valor_estilo ;
 expressao            = termo, { operador_aritmetico, termo } ;
-termo                = literal | medida | referencia_token | chamada_valor
-                     | "(", expressao, ")" ;
+termo                = literal | medida | referencia_token | lista_valores
+                     | chamada_valor | "(", expressao, ")" ;
 operador_aritmetico  = "+" | "-" | "*" | "/" ;
 literal              = STRING | STRING_MULTILINHA | NUMERO
                      | "verdadeiro" | "falso" | "nulo" ;
