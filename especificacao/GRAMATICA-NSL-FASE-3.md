@@ -466,3 +466,92 @@ Seletor, propriedade, função de valor, unidade e token devem resolver em catá
 ### 13.3 Rejeições obrigatórias
 
 A forma `estilo(seletor.elemento("x")) { ... }`, chamadas `cor("#fff");`, regra sem dois-pontos, declaração sem ponto e vírgula, unidade desconhecida, valor sem tipo válido, seletor incompleto e marcador `!important` são rejeitados no perfil 0.2.0.
+
+
+## 14. EBNF fechada do núcleo 0.2.0
+
+Esta seção substitui a seção 13 anterior e todas as produções legadas incompatíveis. Cada não terminal utilizado abaixo está definido neste bloco ou é token explicitamente definido na especificação léxica 0.2.0.
+
+~~~ebnf
+arquivo              = { QUEBRA }, [ modulo ], { item_raiz }, EOF ;
+item_raiz            = declaracao_topo | regra_estilo | QUEBRA ;
+modulo               = "modulo", nome_qualificado, bloco ;
+declaracao_topo      = importacao | exportacao | declaracao_constante
+                     | declaracao_variavel | declaracao_funcao
+                     | declaracao_tipo | declaracao_tema
+                     | declaracao_componente ;
+importacao           = "importar", nome_qualificado, [ "como", IDENT ], ";" ;
+exportacao           = "exportar", IDENT, ";" ;
+declaracao_constante = [ visibilidade ], "constante", IDENT,
+                       [ anotacao_tipo ], "=", expressao, ";" ;
+declaracao_variavel  = [ visibilidade ], "variavel", IDENT,
+                       [ anotacao_tipo ], "=", expressao, ";" ;
+visibilidade         = "publico" | "privado" | "protegido" ;
+anotacao_tipo        = ":", tipo ;
+declaracao_funcao    = [ visibilidade ], [ "assinc" ], "funcao",
+                       IDENT, assinatura, bloco ;
+assinatura           = "(", [ lista_parametros ], ")",
+                       [ ":", tipo ] ;
+lista_parametros     = parametro, { ",", parametro } ;
+parametro            = IDENT, [ anotacao_tipo ], [ "=", expressao ] ;
+declaracao_tipo      = "tipo", IDENT, "=", tipo, ";" ;
+declaracao_tema      = "tema", IDENT, bloco ;
+declaracao_componente = [ visibilidade ], "componente", IDENT,
+                        [ assinatura ], bloco ;
+bloco                = "{", { QUEBRA | declaracao_topo | regra_estilo
+                     | declaracao_visual | comando_funcional }, "}" ;
+comando_funcional    = "retorne", [ expressao ], ";"
+                     | "se", "(", expressao, ")", bloco,
+                       [ "senao", bloco ]
+                     | "lancar", expressao, ";"
+                     | "tente", bloco, { "capturar", bloco },
+                       [ "finalmente", bloco ] ;
+regra_estilo         = grupo_seletores, ":", bloco_estilo ;
+grupo_seletores      = seletor, { ",", seletor } ;
+seletor              = seletor_simples, { combinador, seletor_simples } ;
+seletor_simples      = tipo_elemento, { modificador }
+                     | modificador_inicial, { modificador }
+                     | "*" ;
+tipo_elemento        = IDENT ;
+modificador_inicial  = "." IDENT | "#" IDENT | seletor_atributo
+                     | seletor_estado | seletor_parte ;
+modificador          = "." IDENT | "#" IDENT | seletor_atributo
+                     | seletor_estado | seletor_parte ;
+seletor_atributo     = "[", IDENT, [ operador_atributo, literal ], "]" ;
+operador_atributo    = "=" | "!=" | "^=" | "$=" | "*=" | "~=" | "|=" ;
+seletor_estado       = ":", IDENT, [ "(", [ lista_argumentos ], ")" ] ;
+seletor_parte        = "::", IDENT ;
+combinador           = ESPACO_SELETOR | ">" | "+" | "~" ;
+bloco_estilo         = "{", { QUEBRA | declaracao_visual }, "}" ;
+declaracao_visual    = declaracao_valor | regra_estilo ;
+declaracao_valor     = IDENT, ":", valor_estilo, ";" ;
+valor_estilo         = literal | medida | referencia_token | lista_valores
+                     | chamada_valor | expressao ;
+medida               = NUMERO, UNIDADE ;
+referencia_token     = "$", nome_qualificado ;
+lista_valores        = "[", [ valor_estilo, { ",", valor_estilo }, [ "," ] ], "]" ;
+chamada_valor        = nome_qualificado, "(", [ lista_argumentos ], ")" ;
+lista_argumentos     = argumento, { ",", argumento } ;
+argumento            = [ IDENT, "=" ], valor_estilo ;
+expressao            = termo, { operador_aritmetico, termo } ;
+termo                = literal | medida | referencia_token | chamada_valor
+                     | "(", expressao, ")" ;
+operador_aritmetico  = "+" | "-" | "*" | "/" ;
+literal              = STRING | STRING_MULTILINHA | NUMERO
+                     | "verdadeiro" | "falso" | "nulo" ;
+tipo                 = nome_qualificado | "[" tipo "]"
+                     | nome_qualificado, "<", tipo, { ",", tipo }, ">" ;
+nome_qualificado     = IDENT, { ".", IDENT } ;
+~~~ 
+
+### 14.1 Terminais
+
+Os terminais de pontuação e operadores correspondem literalmente aos tokens enumerados em NSL-FASE-3-LEXICO-E-SINTAXE.md. QUEBRA, ESPACO_SELETOR, IDENT, STRING, STRING_MULTILINHA, NUMERO, UNIDADE e EOF são tokens do lexer/layout. Palavras reservadas são tokens reconhecidos por grafia, mas preservam a grafia original.
+
+### 14.2 Limite do núcleo
+
+O núcleo gramatical 0.2.0 cobre módulos, imports/exports, declarações básicas, regras diretas, seletores, valores, funções de valor e expressões aritméticas restritas. Recursos avançados (animações, transições, consultas, tokens temáticos avançados, estados reativos, generics avançados, efeitos e expressões Nebula) exigem extensões versionadas e não são aceitos implicitamente pelo núcleo.
+
+### 14.3 Critério de prontidão do lexer
+
+O inventário lexical está fechado para o núcleo acima. A análise contextual de ESPACO_SELETOR depende de estados lexicais e posição de tokens, mas nunca de heurística baseada em conteúdo semântico. O lexer entrega trivia e spans; o parser confirma a relação. A gramática e o corpus ainda não foram executados.
