@@ -333,3 +333,73 @@ Esta gramática ainda não especifica integralmente:
 - propriedades e tipos de unidade nativos.
 
 Esses itens são trabalho técnico da especificação, não perguntas abertas de preferência. A gramática só será promovida a normativa depois da revisão e dos testes de conformidade.
+
+
+---
+
+## 12. Revisão de sintaxe 0.2.0 — seletores diretos e declarações por dois-pontos
+
+**Esta seção é a revisão autoritativa da sintaxe de autoria.** Em caso de conflito, ela substitui as produções das seções 4 e 5 desta versão 0.1.0. A sintaxe básica aprovada é .nome para classe e nome para elemento. A forma funcional antiga estilo(seletor...) não é a forma canônica de autoria.
+
+### 12.1 Regras visuais
+
+```ebnf
+regra_estilo       = seletor, bloco_estilo ;
+bloco_estilo       = "{", { QUEBRA | declaracao_visual }, "}" ;
+declaracao_visual  = declaracao_valor | regra_estilo
+                   | declaracao_token | declaracao_consulta ;
+declaracao_valor   = IDENT, ":", valor_estilo, ";" ;
+```
+
+Exemplo:
+
+```nsl
+.nome: {
+    cor: "#ffffff";
+    tamanhoFonte: 16px;
+}
+```
+
+### 12.2 Seletores diretos
+
+```ebnf
+seletor            = seletor_simples, { combinador, seletor_simples } ;
+seletor_simples    = IDENT, { modificador_seletor }
+                   | ".", IDENT, { modificador_seletor }
+                   | "#", IDENT, { modificador_seletor }
+                   | "*" ;
+modificador_seletor = ".", IDENT | "#", IDENT
+                    | seletor_atributo | seletor_estado
+                    | seletor_parte ;
+seletor_atributo   = "[", IDENT, [ operador_atributo, valor_estilo ], "]" ;
+operador_atributo  = "=" | "!=" | "^=" | "$=" | "*=" | "~=" | "|=" ;
+seletor_estado     = ":", IDENT, [ "(", [ lista_argumentos ], ")" ] ;
+seletor_parte      = "::", IDENT ;
+combinador         = ESPACO | ">" | "+" | "~" ;
+grupo_seletores    = seletor, { ",", seletor } ;
+```
+
+### 12.3 Valores
+
+```ebnf
+valor_estilo       = literal | medida | referencia_token
+                   | lista_valores | chamada_valor | expressao ;
+lista_valores      = "[", [ valor_estilo, { ",", valor_estilo } ], "]" ;
+referencia_token   = "$", nome_qualificado ;
+chamada_valor      = nome_qualificado, "(", [ lista_argumentos ], ")" ;
+```
+
+A análise semântica valida tipos, dimensões, funções, aridade e domínio da propriedade. .nome significa classe; nome significa elemento. A extensão #nome representa id e obedece à unicidade do escopo.
+
+### 12.4 Regras de precedência e layout
+
+- Acesso/chamada/indexação; unários; multiplicação; adição; comparação; igualdade; e; ou; condicional; atribuição.
+- Atribuição é associativa à direita; comparações encadeadas são rejeitadas.
+- Blocos usam chaves e indentação obrigatória de quatro espaços.
+- Tabs não são permitidos na indentação.
+- Declarações de valor exigem ponto e vírgula; regras de seletor não recebem ponto e vírgula após o bloco.
+- A chave de fechamento alinha-se à declaração que abriu o bloco.
+
+### 12.5 Compatibilidade
+
+A revisão 0.2.0 substitui as produções de regra visual e seletor da versão 0.1.0. Exemplos antigos com chamadas funcionais de seletor são históricos e não representam a sintaxe básica aprovada. Esta revisão continua draft até revisão e execução do corpus por implementação de referência.
