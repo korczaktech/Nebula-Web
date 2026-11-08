@@ -1,11 +1,12 @@
 //variaveis para declarar na classe
 
-variavel fonteNML: texto = nulo
-variavel posicaoAtual: texto = nulo
-
 classe Scanner: {
-    publico funcao(fonteNML: texto, posicaoAtual: texto): {
+    variavel posicaoAtual: inteiro_u64 = 0
+    variavel fonteNML: texto = nulo
+    funcao teste(fonteNML: texto, posicaoAtual: inteiro_u64): {
         isto.fonteNML = fonteNML
         isto.posicaoAtual = posicaoAtual
+        
     }
+    teste(fonteNML, posicaoAtual)
 }
