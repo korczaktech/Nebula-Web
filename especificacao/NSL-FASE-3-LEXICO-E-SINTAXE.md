@@ -193,7 +193,7 @@ fallback prioridade camada origem densidade responsivo
 9. O parser deve rejeitar chaves não balanceadas, indentação inconsistente e declarações sem terminador obrigatório.
 10. Não existe palavra de fechamento equivalente a `fim`; o fechamento estrutural é feito por `}`.
 
-## 8. Forma funcional de propriedades
+## 8. Histórico 0.1.x — forma funcional de propriedades (NÃO NORMATIVO)
 
 A forma funcional abaixo é histórica e rejeitada pelo perfil canônico 0.2.0:
 
@@ -213,7 +213,7 @@ Regras:
 - propriedades desconhecidas são erro, aviso ou extensão apenas conforme o namespace e a política de módulos;
 - aliases em inglês ou nomes CSS são resolvidos por tabela de interoperabilidade, nunca por heurística.
 
-## 9. Seletores
+## 9. Histórico 0.1.x — seletores funcionais (NÃO NORMATIVO)
 
 Seletores são expressões tipadas construídas por funções do namespace `seletor`. Esta decisão evita reutilizar a pontuação e os combinadores textuais do CSS.
 
@@ -241,7 +241,7 @@ seletor.grupo(
 
 A AST do seletor preserva tipo, relação, escopo, origem e posição. A validação semântica verifica se o seletor pode existir no contexto NML, DOM ou Web Components.
 
-## 10. Estrutura de arquivo e declarações
+## 10. Histórico 0.1.x — estrutura funcional (NÃO NORMATIVO)
 
 A forma de alto nível proposta:
 
@@ -269,7 +269,7 @@ Regras:
 - declarações de estilo aceitam um seletor tipado e um bloco de propriedades;
 - componentes, temas, tokens, funções e propriedades personalizadas usam declarações próprias, formalizadas em gramática derivada.
 
-## 11. Gramática EBNF inicial
+## 11. Histórico 0.1.x — gramática funcional inicial (NÃO NORMATIVA)
 
 A EBNF abaixo formaliza o núcleo já proposto. Produções marcadas como extensão serão detalhadas em documentos derivados.
 
@@ -332,7 +332,7 @@ literal              = numero | string | "verdadeiro" | "falso" | "nulo" | "ause
 nome_qualificado     = identificador, { ".", identificador } ;
 ```
 
-## 12. Regras de validação semântica
+## 12. Histórico 0.1.x — validação semântica da sintaxe funcional (NÃO NORMATIVA)
 
 - Uma chamada de propriedade só pode ocorrer dentro de um bloco de estilo ou em outro contexto explicitamente autorizado.
 - O nome da propriedade é resolvido no catálogo e nos namespaces importados.
@@ -343,7 +343,7 @@ nome_qualificado     = identificador, { ".", identificador } ;
 - Nenhuma conversão CSS é considerada semântica se perder informação sem diagnóstico.
 - Recursos específicos de ZenithOS só são acessíveis pelo contexto autorizado Portunus/ZenithOS, por contratos e syscalls mediados pelo kernel.
 
-## 13. Casos válidos iniciais
+## 13. Histórico 0.1.x — casos válidos da sintaxe funcional (NÃO NORMATIVOS)
 
 ```nsl
 modulo exemplo.basico {
@@ -371,7 +371,7 @@ modulo exemplo.componentes {
 }
 ```
 
-## 14. Casos inválidos iniciais
+## 14. Histórico 0.1.x — casos inválidos da sintaxe funcional (NÃO NORMATIVOS)
 
 ```nsl
 // Inválido: declaração de propriedade fora de bloco autorizado.
@@ -401,7 +401,7 @@ modulo exemplo {
 }
 ```
 
-## 15. Pendências técnicas que não exigem decisão de produto
+## 15. Extensões adiadas além do núcleo 0.2.0
 
 As próximas especificações técnicas devem fechar, sem nova entrevista geral:
 - tabela completa de tokens e estados do lexer;
@@ -417,7 +417,7 @@ As próximas especificações técnicas devem fechar, sem nova entrevista geral:
 
 Esses detalhes serão decididos tecnicamente e documentados. Uma nova pergunta ao usuário só será feita se surgir uma escolha de produto genuína que não possa ser resolvida por consistência técnica.
 
-## 16. Critério de promoção a gramática normativa
+## 16. Critério histórico de promoção da proposta 0.1.x
 
 Este documento continua em rascunho até que:
 1. a gramática completa seja validada sem conflitos;
