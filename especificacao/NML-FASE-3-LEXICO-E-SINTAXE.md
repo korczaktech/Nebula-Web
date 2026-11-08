@@ -175,7 +175,7 @@ A Fase 3 documental NML estará especificada quando léxico, EBNF, semântica, d
 | `verdadeiro`, `falso` | literais lógicos |
 | `nulo` | literal de ausência |
 
-Palavras reservadas são reconhecidas sem distinção de caixa somente nos contextos gramaticais que as definem? **Não.** A comparação é case-sensitive: a grafia oficial acima é obrigatória. A palavra `NML` no cabeçalho é terminal reservado; identificadores definidos pelo autor permanecem case-sensitive.
+Palavras reservadas são case-sensitive: a grafia oficial acima é obrigatória. A palavra `NML` no cabeçalho é terminal reservado; identificadores definidos pelo autor permanecem case-sensitive.
 
 ### 14.2 Pontuação e delimitadores
 
