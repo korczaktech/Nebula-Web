@@ -787,3 +787,38 @@ O NSL só poderá ser declarado implementado quando, no mínimo:
 - **Testes de conformidade:** pendentes de especificação e implementação.
 
 Este documento é a referência consolidada dos requisitos do NSL no Nebula-Web. Mudanças futuras de escopo ou semântica deverão atualizar a versão do documento, preservar o histórico de decisões e manter a distinção entre requisitos planejados e funcionalidades implementadas.
+
+
+---
+
+## 28. Decisão inicial de sintaxe — seletores de classe e de elemento
+
+A distinção inicial entre seletores NSL foi aprovada e está registrada em [Decisão arquitetural 0003 — Estrutura inicial de NML e seletores básicos de NSL](especificacao/decisoes-arquiteturais/0003-sintaxe-inicial-nml-nsl.md).
+
+### 28.1 Seletor de classe: identificador precedido por ponto
+
+Um identificador precedido por ponto representa um seletor de classe:
+
+```nsl
+.nome: {
+    elemento: configuração;
+}
+```
+
+Esse seletor corresponde aos elementos associados à classe `nome`.
+
+### 28.2 Seletor de elemento: identificador sem ponto
+
+Um identificador sem ponto representa um seletor de elemento:
+
+```nsl
+nome: {
+    ...
+}
+```
+
+Esse seletor corresponde aos elementos identificados pelo nome/tipo `nome`.
+
+Assim, `.nome` e `nome` são construções semanticamente distintas: classe e elemento, respectivamente.
+
+**Limite de formalização:** os exemplos registram a distinção aprovada, mas não fecham a gramática completa. Catálogo e tipagem de propriedades, valores, especificidade, cascata, herança, seletores compostos e regras de erro permanecem sujeitos à formalização. Não há declaração de implementação do lexer ou parser.
