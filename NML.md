@@ -914,3 +914,52 @@ Esses pontos deverão ser especificados em documentos derivados e decisões téc
 - **Testes de conformidade:** ainda precisam ser especificados e implementados.
 
 Este arquivo é a referência de requisitos da NML no Nebula-Web. Alterações futuras deverão preservar o histórico das decisões e atualizar a versão deste documento quando houver mudança de escopo ou semântica.
+
+
+---
+
+## 28. Decisões iniciais de sintaxe — estrutura e conteúdo
+
+As decisões iniciais aprovadas para a estrutura concreta de NML estão registradas em [Decisão arquitetural 0003 — Estrutura inicial de NML e seletores básicos de NSL](especificacao/decisoes-arquiteturais/0003-sintaxe-inicial-nml-nsl.md).
+
+### 28.1 Regiões principais opcionais e independentes
+
+As regiões `cabecalho`, `pagina` e `rodape` são independentes e opcionais. Um documento pode declarar somente uma delas ou combinar várias. Não é necessário declarar todas em cada documento.
+
+```nml
+documento NML: linguagem: NML
+
+pagina: {
+    ...
+}
+```
+
+### 28.2 Aninhamento de elementos
+
+Elementos podem ser aninhados livremente, inclusive elementos do mesmo tipo dentro de si, respeitando os contratos semânticos específicos de cada elemento.
+
+```nml
+pagina: {
+    div: {
+        div: {
+            p: {
+                ...
+            }
+        }
+    }
+}
+```
+
+### 28.3 Conteúdo textual explícito
+
+O texto de um elemento é declarado pela propriedade `texto`:
+
+```nml
+t1: {
+    texto: "Criado por mim"
+}
+```
+
+Esse formato separa conteúdo textual de outras propriedades e configurações do elemento.
+
+**Limite de formalização:** estas decisões definem a direção sintática inicial. A gramática normativa, as regras de strings, as restrições semânticas e a implementação do frontend continuam pendentes. Os exemplos não comprovam suporte no compilador.
