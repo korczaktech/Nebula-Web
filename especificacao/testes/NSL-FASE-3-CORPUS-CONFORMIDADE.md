@@ -157,3 +157,21 @@ A especificação da Fase 3 poderá ser considerada formalizada quando:
 8. as limitações restantes forem registradas como itens de implementação, não como ambiguidades da especificação.
 
 **Estado atual:** o corpus foi especificado, mas não executado. A conclusão da Fase 3 depende da gramática final e da implementação de referência.
+
+
+---
+
+## 10. Adendo de conformidade — sintaxe direta 0.2.0
+
+A partir da revisão 0.2.0, os casos básicos obrigatórios incluem:
+
+| ID | Entrada | Resultado esperado |
+|---|---|---|
+| NSL-DIR-P-001 | `.nome: { cor: "#fff"; }` | seletor de classe e declaração |
+| NSL-DIR-P-002 | `nome: { cor: "#fff"; }` | seletor de elemento e declaração |
+| NSL-DIR-P-003 | `.nome { ... }` | rejeitar: dois-pontos obrigatório |
+| NSL-DIR-N-001 | `estilo(seletor.elemento("nome")) { ... }` | rejeitar no perfil canônico 0.2.0 |
+| NSL-DIR-N-002 | declaração sem `;` | rejeitar |
+| NSL-DIR-N-003 | nome de propriedade desconhecido | erro semântico |
+
+Os exemplos antigos de sintaxe funcional permanecem somente como histórico de proposta e não podem ser usados como casos positivos da gramática 0.2.0.
