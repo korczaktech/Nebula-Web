@@ -5,9 +5,9 @@
 
 classe Token: {
     funcao construtor(tipos: texto, valor: texto, final: inteiro_u64, inicio: inteiro_u64): {
-        isto.tipos
-        isto.valor
-        isto.inicio
-        isto.final
+        isto.tipos = tipos
+        isto.valor = valor
+        isto.inicio = inicio
+        isto.final = final
     }
 }
