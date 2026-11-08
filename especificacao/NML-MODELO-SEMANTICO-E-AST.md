@@ -107,3 +107,28 @@ Mesma entrada, versão de especificação e dependências produzem a mesma AST, 
 ## 12. Fora do núcleo estático 0.1
 
 Estado reativo, eventos, expressões Nebula, componentes assíncronos, SSR, hidratação e ciclo de vida exigem nós e contratos adicionais antes de integrarem a gramática estática.
+
+
+## 13. Fechamento normativo de conteúdo e propriedades
+
+### 13.1 Conteúdo textual
+
+`texto` é propriedade contextual, não palavra reservada. Aceita string simples ou multilinha, inclusive vazia, no máximo uma vez por elemento. Não há conversão implícita de números, booleanos ou nulo para texto.
+
+Cada elemento declara exatamente um modelo de conteúdo: `texto`, `filhos` ou `misto`. `texto` proíbe filhos; `filhos` proíbe a propriedade texto; `misto` permite ambos e preserva a ordem relativa entre segmentos textuais e filhos na AST. Se um catálogo ainda não declarar o modelo, o elemento é inválido até a declaração existir; não se presume `misto`.
+
+### 13.2 Propriedades repetíveis
+
+O padrão é não repetível. Uma propriedade só acumula quando seu contrato declara `repetivel`, estratégia de combinação (`lista`, `concatenar` ou `unir`) e ordem de aplicação. Propriedade duplicada não repetível é erro. Não há regra implícita de “último valor vence”.
+
+### 13.3 Objetos
+
+Chaves de objeto são identificadores únicos após NFC. Duplicidade é sempre erro. A ordem textual é preservada para ferramentas e diagnósticos, mas não altera igualdade semântica de objetos.
+
+### 13.4 Catálogo
+
+O catálogo versionado é a única autoridade para elementos nativos, propriedades, tipos, nulabilidade, obrigatoriedade, repetibilidade, conteúdo permitido e acessibilidade. Nome encontrado apenas em exemplo não é automaticamente nativo.
+
+### 13.5 Estado
+
+As regras acima fecham as ambiguidades documentais do núcleo estático 0.1.0. A existência de catálogo ou análise semântica implementada não é presumida.
