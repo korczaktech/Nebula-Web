@@ -151,3 +151,59 @@ A gramática é versionada. Versões minor podem adicionar construções compat�
 ## 13. Critério de fechamento
 
 A Fase 3 documental NML estará especificada quando léxico, EBNF, semântica, diagnósticos e corpus forem revisados como conjunto. Aprovação documental não equivale à implementação do lexer/parser nem à aprovação de testes executados.
+
+
+---
+
+## 14. Inventário léxico do núcleo 0.1.0
+
+### 14.1 Palavras reservadas do documento
+
+| Palavra | Contexto |
+|---|---|
+| `documento` | cabeçalho documental |
+| `NML` | identificador de linguagem no cabeçalho |
+| `linguagem` | campo do cabeçalho |
+| `cabecalho` | região principal |
+| `pagina` | região principal |
+| `rodape` | região principal |
+| `metadados` | região auxiliar |
+| `sistema` | região auxiliar |
+| `estilo` | região auxiliar |
+| `importar` | referência externa de estilo |
+| `texto` | propriedade textual padronizada |
+| `verdadeiro`, `falso` | literais lógicos |
+| `nulo` | literal de ausência |
+
+Palavras reservadas são reconhecidas sem distinção de caixa somente nos contextos gramaticais que as definem? **Não.** A comparação é case-sensitive: a grafia oficial acima é obrigatória. A palavra `NML` no cabeçalho é terminal reservado; identificadores definidos pelo autor permanecem case-sensitive.
+
+### 14.2 Pontuação e delimitadores
+
+| Token | Uso |
+|---|---|
+| `:` | introduz bloco ou propriedade |
+| `{` e `}` | blocos de elementos/dados |
+| `[` e `]` | listas |
+| `(` e `)` | agrupamentos reservados a extensões |
+| `,` | separa itens de listas/cabeçalho |
+| `.` | qualificação de nomes |
+| `@` | inicia referência tipada |
+| `"` e `'` | delimitadores de string |
+
+### 14.3 Classes de token
+
+O lexer deve produzir pelo menos: IDENT, STRING, STRING_MULTILINHA, NUMERO_INTEIRO, NUMERO_DECIMAL, BOOLEANO, NULO, DOIS_PONTOS, ABRE_CHAVE, FECHA_CHAVE, ABRE_COLCHETE, FECHA_COLCHETE, VIRGULA, PONTO, ARROBA, QUEBRA, INDENTACAO, DEDENTACAO, COMENTARIO e EOF.
+
+Tokens de comentário podem ser descartados após a associação de comentários de documentação; tokens de quebra e indentação preservam a origem para diagnósticos e layout.
+
+### 14.4 Precedência de reconhecimento
+
+1. Comentários e strings são reconhecidos antes de pontuação interna.
+2. Números são reconhecidos antes de identificadores quando começam por dígito.
+3. Palavras reservadas são reconhecidas após formar o identificador completo.
+4. Operadores/delimitadores são reconhecidos pelo maior prefixo válido.
+5. Caractere não classificado gera erro léxico com offset e caractere de origem.
+
+### 14.5 Política de layout
+
+O lexer preserva quebra física e calcula quebra lógica. Quebra dentro de string multilinha não produz separador. Quebra dentro de lista/objeto pode ser ignorada pelo parser enquanto o delimitador estiver aberto. Indentação de fechamento deve corresponder exatamente ao nível de abertura.
