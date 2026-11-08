@@ -963,3 +963,21 @@ t1: {
 Esse formato separa conteúdo textual de outras propriedades e configurações do elemento.
 
 **Limite de formalização:** estas decisões definem a direção sintática inicial. A gramática normativa, as regras de strings, as restrições semânticas e a implementação do frontend continuam pendentes. Os exemplos não comprovam suporte no compilador.
+
+
+---
+
+## 29. Formalização técnica da Fase 3
+
+A proposta documental da primeira versão está consolidada nos seguintes documentos:
+
+- [Léxico e sintaxe NML](especificacao/NML-FASE-3-LEXICO-E-SINTAXE.md).
+- [Gramática EBNF NML](especificacao/GRAMATICA-NML-FASE-3.md).
+- [Modelo semântico, tipos e AST](especificacao/NML-MODELO-SEMANTICO-E-AST.md).
+- [Corpus de conformidade NML](especificacao/testes/NML-FASE-3-CORPUS-CONFORMIDADE.md).
+- [Contratos NML–NSL–Nebula](especificacao/CONTRATOS-NML-NSL-NEBULA.md).
+- [Diagnósticos e recuperação](especificacao/DIAGNOSTICOS-E-RECUPERACAO.md).
+
+Esses documentos formalizam a proposta estática NML 0.1.0 e preservam as decisões aprovadas: regiões principais opcionais, aninhamento livre e conteúdo textual explícito por `texto`.
+
+**Estado:** especificação documental elaborada em draft; revisão formal e execução do corpus ainda pendentes. Lexer, parser, AST em código, compilador e geração HTML não são declarados implementados.
