@@ -106,3 +106,28 @@ Cada linguagem publica versão própria. O contrato integrado declara intervalos
 - Nenhum caminho contorna validação de tipos ou segurança.
 - Source maps atravessam fronteiras entre linguagens.
 - Testes diferenciais verificam equivalência esperada entre compilação isolada e integrada.
+
+
+## 11. Resolução cruzada normativa
+
+### 11.1 Identidade e catálogo
+
+A identidade de elemento NML é a tupla (namespace, nome normalizado NFC, versão do catálogo, identidade do componente). Classes e ids pertencem ao nó NML e são resolvidos dentro do escopo documental/componente. Classes podem repetir-se; id deve ser único no escopo documental, salvo escopo isolado explicitamente declarado pelo contrato de componente.
+
+O catálogo declara: nome e versão, tipo de nó, propriedades, tipos, nulabilidade, obrigatoriedade, repetibilidade, modelo de conteúdo, classes/estados expostos, atributos selecionáveis, partes, acessibilidade e capacidades. Nomes não catalogados não são implicitamente nativos.
+
+### 11.2 Resolução de seletores
+
+NSL resolve seletor contra o catálogo NML disponível no projeto. Se NML for compilada isoladamente, seletores podem ser analisados sem resolução cruzada; o resultado é AST não vinculada. Em compilação integrada, elemento, classe, id, atributo, estado e parte são verificados. Seletor válido sem correspondência gera aviso; incompatibilidade estrutural ou tentativa de atravessar escopo isolado gera erro.
+
+### 11.3 Expressões Nebula
+
+O núcleo NML 0.1.0 e NSL 0.2.0 não aceitam trechos arbitrários de Nebula. Uma extensão futura deve definir nó de expressão opaco, delimitador, contexto, tipo de entrada/saída, efeitos permitidos, sincronismo, permissões e mapeamento de origem antes de aceitar qualquer expressão. O parser correspondente é sempre o parser oficial Nebula.
+
+### 11.4 Pipeline e falhas
+
+Compilação integrada executa lexers/parsers independentes, semântica individual, resolução de módulos, construção do catálogo, vínculo NML–NSL, validação de tipos e geração de IR. Falha em um frontend não pode ser mascarada por fallback do outro. AST parcial é somente para ferramentas e nunca artefato válido.
+
+### 11.5 Compatibilidade
+
+Cada linguagem possui versão independente. O manifesto declara versões exatas/intervalos compatíveis e versões do catálogo. Ausência ou incompatibilidade de versão é erro antes da geração. Source maps preservam spans e origem ao atravessar fronteiras.
