@@ -45,8 +45,8 @@ A documentação inicial de formalização foi elaborada, mas ainda está em rev
 - [x] Gramática EBNF do núcleo estático 0.1.0-draft.
 - [x] Modelo semântico, tipos e contrato de AST em documentação.
 - [x] Corpus positivo/negativo especificado.
-- [ ] Revisão normativa e aprovação formal.
-- [ ] Execução do corpus por implementação de referência.
+- [x] Revisão normativa documental consolidada para início do lexer.
+- [ ] Aprovação de conformidade após execução do corpus por implementação de referência.
 - [ ] Lexer, parser e AST implementados em Nebula.
 
 ### NSL — entregáveis documentais
@@ -54,8 +54,8 @@ A documentação inicial de formalização foi elaborada, mas ainda está em rev
 - [x] Revisão EBNF 0.2.0-draft para seletores diretos.
 - [x] Modelo semântico, tipos, especificidade, cascata e AST documentados.
 - [x] Corpus positivo/negativo ampliado.
-- [ ] Revisão normativa e aprovação formal.
-- [ ] Execução do corpus por implementação de referência.
+- [x] Revisão normativa documental consolidada para início do lexer.
+- [ ] Aprovação de conformidade após execução do corpus por implementação de referência.
 - [ ] Lexer, parser e AST implementados em Nebula.
 
 ### Integração e qualidade documental
