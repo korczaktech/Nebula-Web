@@ -67,3 +67,25 @@ A documentação inicial de formalização foi elaborada, mas ainda está em rev
 - [ ] Source maps ponta a ponta implementados e validados.
 
 Os itens marcados [x] acima significam somente que o artefato documental foi criado. Não significam código, testes ou conformidade implementados.
+
+
+## Revisão normativa — marco documental
+
+- [x] Harmonizar a regra contextual da propriedade NML texto.
+- [x] Consolidar cabeçalho, regiões, elementos, valores e regras de conteúdo NML.
+- [x] Fechar regras de strings, números, identificadores e layout NML.
+- [x] Consolidar sintaxe direta NSL 0.2.0 como única forma canônica.
+- [x] Definir tokens, unidades, seletores, valores e limites de prioridade NSL 0.2.0.
+- [x] Fechar o modelo de conteúdo, repetibilidade, objetos e tipos NML.
+- [x] Formalizar especificidade, cascata, herança e dimensões NSL.
+- [x] Ampliar os corpora positivos/negativos e registrar casos ainda não executados.
+- [x] Formalizar contratos de integração e matriz de diagnósticos.
+- [ ] Executar revisão automatizada dos documentos e validar corpus com lexer/parser de referência.
+- [ ] Implementar lexer NML em Nebula.
+- [ ] Implementar lexer NSL em Nebula.
+
+**Marco alcançado:** documentação normativa consolidada o suficiente para iniciar a implementação dos lexers. Os itens marcados como concluídos representam somente documentação escrita. Nenhum lexer, parser ou teste de conformidade foi executado/concluído por este marco.
+
+## Próxima etapa autorizada
+
+**Implementar o lexer NML e o lexer NSL, separadamente, em Nebula.** A ordem recomendada é NML primeiro e NSL em seguida, com testes unitários lexicais desde o primeiro commit. Não iniciar parser antes de estabilizar tokens, spans, erros e layout de cada lexer.
