@@ -409,3 +409,60 @@ A análise semântica valida tipos, dimensões, funções, aridade e domínio da
 ### 12.5 Compatibilidade
 
 A revisão 0.2.0 substitui as produções de regra visual e seletor da versão 0.1.0. Exemplos antigos com chamadas funcionais de seletor são históricos e não representam a sintaxe básica aprovada. Esta revisão continua draft até revisão e execução do corpus por implementação de referência.
+
+
+## 13. Gramática normativa consolidada 0.2.0
+
+Esta seção substitui as produções funcionais das seções anteriores. O perfil canônico não aceita `estilo(seletor...)` nem chamadas funcionais de propriedades.
+
+~~~ebnf
+arquivo             = { QUEBRA }, [ modulo ], { declaracao_topo | regra_estilo | QUEBRA }, EOF ;
+modulo              = "modulo", nome_qualificado, bloco ;
+declaracao_topo     = importacao | exportacao | declaracao_constante | declaracao_variavel
+                    | declaracao_funcao | declaracao_tipo | declaracao_tema | declaracao_componente ;
+importacao          = "importar", nome_qualificado, [ "como", IDENT ], ";" ;
+exportacao          = "exportar", IDENT, ";" ;
+regra_estilo        = grupo_seletores, ":", bloco_estilo ;
+grupo_seletores     = seletor, { ",", seletor } ;
+seletor             = seletor_simples, { combinador, seletor_simples } ;
+seletor_simples     = [ tipo_elemento ], { modificador } | "*" ;
+tipo_elemento       = IDENT ;
+modificador         = ".", IDENT | "#", IDENT | seletor_atributo | seletor_estado | seletor_parte ;
+seletor_atributo    = "[", IDENT, [ operador_atributo, literal ], "]" ;
+operador_atributo   = "=" | "!=" | "^=" | "$=" | "*=" | "~=" | "|=" ;
+seletor_estado      = ":", IDENT, [ "(", [ lista_argumentos ], ")" ] ;
+seletor_parte       = "::", IDENT ;
+combinador          = ESPACO_SELETOR | ">" | "+" | "~" ;
+bloco_estilo        = "{", { QUEBRA | declaracao_visual }, "}" ;
+declaracao_visual   = declaracao_valor | regra_estilo | declaracao_token | declaracao_consulta ;
+declaracao_valor    = IDENT, ":", valor_estilo, ";" ;
+valor_estilo        = literal | medida | referencia_token | lista_valores | chamada_valor | expressao ;
+medida              = NUMERO, UNIDADE ;
+referencia_token    = "$", nome_qualificado ;
+lista_valores       = "[", [ valor_estilo, { ",", valor_estilo }, [ "," ] ], "]" ;
+chamada_valor       = nome_qualificado, "(", [ lista_argumentos ], ")" ;
+expressao           = termo, { operador_aritmetico, termo } ;
+termo               = literal | medida | referencia_token | chamada_valor | "(", expressao, ")" ;
+operador_aritmetico = "+" | "-" | "*" | "/" ;
+literal             = STRING | NUMERO | "verdadeiro" | "falso" | "nulo" ;
+lista_argumentos    = argumento, { ",", argumento } ;
+argumento           = [ IDENT, "=" ], valor_estilo ;
+nome_qualificado    = IDENT, { ".", IDENT } ;
+~~~
+
+### 13.1 Regras de desambiguação
+
+1. Seletor de tipo é IDENT no início de seletor; classe exige ponto, id exige hash, universal é asterisco.
+2. Um espaço entre dois seletores completos é combinador descendente. Espaço em torno de operador, dois-pontos, valor ou dentro de bloco é trivia.
+3. A regra começa no contexto de seletor; uma declaração começa somente dentro de bloco de estilo e tem forma IDENT dois-pontos valor ponto-e-vírgula.
+4. Chamadas de valor não são declarações de propriedade: só aparecem como valor e são resolvidas semanticamente.
+5. Unidades são reconhecidas por catálogo fechado da versão; não são sufixos livres.
+6. `!important` não pertence ao núcleo 0.2.0.
+
+### 13.2 Restrições semânticas
+
+Seletor, propriedade, função de valor, unidade e token devem resolver em catálogo/import. Propriedades duplicadas são erro, salvo política acumulável declarada. Valores devem satisfazer tipo, dimensão e domínio. Seletor sem correspondência é aviso por padrão; perfil estrito pode elevar a erro. Escopos isolados não são atravessados sem exportação explícita.
+
+### 13.3 Rejeições obrigatórias
+
+A forma `estilo(seletor.elemento("x")) { ... }`, chamadas `cor("#fff");`, regra sem dois-pontos, declaração sem ponto e vírgula, unidade desconhecida, valor sem tipo válido, seletor incompleto e marcador `!important` são rejeitados no perfil 0.2.0.
