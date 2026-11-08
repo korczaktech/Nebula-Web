@@ -145,3 +145,19 @@ Texto livre sem `texto`; propriedade sem valor; bloco sem fechamento; chave extr
 ## 12. Estado
 
 Esta EBNF é uma proposta formal para o núcleo estático 0.1. Recursos dinâmicos avançados e NSL embutida dependem de contratos adicionais. A gramática não foi executada por parser e não comprova implementação.
+
+
+## 13. Adendo normativo de fechamento
+
+Este adendo resolve os pontos contextuais necessários ao lexer/parser:
+
+- `texto` permanece terminal IDENT. A gramática não cria terminal reservado para essa grafia.
+- `documento NML: linguagem: ...` é reconhecido somente no início do arquivo. `NSL` e `Nebula` são valores da lista de linguagens, não palavras reservadas globais.
+- Cabeçalho documental e regiões são declarações raiz; a mesma grafia em posição de propriedade/elemento é resolvida pelo contexto gramatical, sem reclassificação lexical.
+- Uma quebra física dentro de colchetes, parênteses ou objeto de valor não encerra a produção; fora desses delimitadores, propriedade termina em quebra lógica.
+- String vazia é válida. Lista e objeto vazios são válidos. Chaves de objeto duplicadas são erro semântico.
+- Objeto de dados somente ocorre na posição de valor. Bloco de elemento somente ocorre após o identificador de elemento e seu dois-pontos.
+- Região raiz duplicada, propriedade duplicada, conteúdo misto incompatível e tipo de propriedade inválido são erros semânticos, não erros do lexer.
+- Todo token terminal deve estar definido no inventário lexical 0.1.0. O lexer não resolve catálogo de elementos/propriedades.
+
+A gramática é considerada documentalmente fechada para iniciar o lexer, sujeita a correções descobertas por testes. Parser e corpus ainda não foram implementados/executados.
