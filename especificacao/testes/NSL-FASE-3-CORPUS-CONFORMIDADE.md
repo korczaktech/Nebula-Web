@@ -1,11 +1,11 @@
 # NSL — Corpus de conformidade da Fase 3
 
 **Estado:** corpus especificado; execução depende de lexer/parser de referência  
-**Versão:** 0.1.0-draft  
+**Versão:** 0.2.0-draft  
 **Gramática-base:** `GRAMATICA-NSL-FASE-3.md`  
 **Regras léxicas:** `NSL-FASE-3-LEXICO-E-SINTAXE.md`
 
-> Os exemplos deste documento definem resultados esperados para uma futura suíte automatizada. Ainda não são resultados de testes executados. Um caso só será marcado como aprovado quando o lexer/parser real o executar e produzir o resultado esperado.
+ > Os exemplos deste documento definem resultados esperados para a sintaxe direta 0.2.0 e extensões documentadas. Ainda não são resultados de testes executados. Um caso só será aprovado após execução pelo lexer/parser real.
 
 ## 1. Contrato do corpus
 
