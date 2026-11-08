@@ -841,3 +841,10 @@ A formalização NSL está organizada nos documentos:
 A sintaxe básica de autoria aprovada é `.nome: { ... }` para seletor de classe e `nome: { ... }` para seletor de elemento. Declarações visuais usam `propriedade: valor;`. A revisão 0.2.0 da gramática registra essa forma e substitui exemplos funcionais anteriores como sintaxe canônica.
 
 **Estado:** especificação documental consolidada em draft; revisão formal e execução do corpus ainda pendentes. Lexer, parser, AST em código, cascata, compilador e geração CSS não são declarados implementados.
+
+
+## Estado normativo NSL 0.2.0
+
+A única sintaxe canônica de autoria é direta: .nome: { ... } para classe, nome: { ... } para elemento e propriedade: valor; dentro do bloco. A sintaxe funcional estilo(seletor...) e propriedade(valor); é histórica e deve ser rejeitada no perfil 0.2.0. O núcleo fecha unidades, seletores, valores, especificidade, cascata, herança e ausência de marcador de prioridade.
+
+**Próxima etapa:** implementar o lexer NSL em Nebula, independentemente do lexer NML. O corpus continua especificado, mas não executado.
