@@ -117,7 +117,7 @@ t1: {
 }
 ```
 
-Texto solto dentro do bloco não é permitido. `texto` é uma propriedade tipada, não um nome de elemento reservado.
+Texto solto dentro do bloco não é permitido. `texto` é um identificador comum no léxico e uma propriedade contextual especial somente na semântica de elementos.
 
 ### 8.2 Listas e objetos
 
@@ -171,11 +171,10 @@ A Fase 3 documental NML estará especificada quando léxico, EBNF, semântica, d
 | `sistema` | região auxiliar |
 | `estilo` | região auxiliar |
 | `importar` | referência externa de estilo |
-| `texto` | propriedade textual padronizada |
 | `verdadeiro`, `falso` | literais lógicos |
 | `nulo` | literal de ausência |
 
-Palavras reservadas são case-sensitive: a grafia oficial acima é obrigatória. A palavra `NML` no cabeçalho é terminal reservado; identificadores definidos pelo autor permanecem case-sensitive.
+Palavras reservadas são case-sensitive. `texto` não é reservada. `NSL` e `Nebula` são nomes de linguagem reconhecidos no cabeçalho; fora dele são identificadores. Identificadores de elemento/propriedade são emitidos como IDENT.
 
 ### 14.2 Pontuação e delimitadores
 
@@ -207,3 +206,17 @@ Tokens de comentário podem ser descartados após a associação de comentários
 ### 14.5 Política de layout
 
 O lexer preserva quebra física e calcula quebra lógica. Quebra dentro de string multilinha não produz separador. Quebra dentro de lista/objeto pode ser ignorada pelo parser enquanto o delimitador estiver aberto. Indentação de fechamento deve corresponder exatamente ao nível de abertura.
+
+
+## 15. Fechamento normativo para implementação do lexer
+
+1. `texto` é IDENT, nunca TOKEN_TEXTO nem palavra reservada global.
+2. `documento`, `linguagem` e `NML` são terminais contextuais do cabeçalho; `NSL` e `Nebula` são valores de nome de linguagem nesse contexto.
+3. `cabecalho`, `pagina`, `rodape`, `metadados`, `sistema` e `estilo` são reconhecidos como regiões somente na posição de declaração raiz.
+4. O lexer emite IDENT para nomes de elementos, propriedades, componentes e chaves de objetos.
+5. O lexer distingue quebra física de quebra lógica e preserva indentação original; a validação estrutural é executada pelo estágio de layout/parser.
+6. String vazia é token STRING válido. Interpolação não pertence ao núcleo 0.1.0.
+7. Os tokens numéricos não absorvem sufixos arbitrários. Unidades visuais pertencem exclusivamente ao léxico NSL.
+8. Os documentos léxico, EBNF, semântica e corpus devem ser lidos em conjunto. O corpus não está executado.
+
+**Pronto para implementação:** sim, como contrato documental do lexer NML. Isso não declara lexer implementado ou testado.
