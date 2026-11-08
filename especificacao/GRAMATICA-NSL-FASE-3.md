@@ -344,7 +344,7 @@ Esses itens são trabalho técnico da especificação, não perguntas abertas de
 ### 12.1 Regras visuais
 
 ```ebnf
-regra_estilo       = seletor, bloco_estilo ;
+regra_estilo       = grupo_seletores, ":", bloco_estilo ;
 bloco_estilo       = "{", { QUEBRA | declaracao_visual }, "}" ;
 declaracao_visual  = declaracao_valor | regra_estilo
                    | declaracao_token | declaracao_consulta ;
@@ -377,6 +377,11 @@ seletor_estado     = ":", IDENT, [ "(", [ lista_argumentos ], ")" ] ;
 seletor_parte      = "::", IDENT ;
 combinador         = ESPACO | ">" | "+" | "~" ;
 grupo_seletores    = seletor, { ",", seletor } ;
+medida             = NUMERO, UNIDADE ;
+cor                = literal_cor | chamada_valor ;
+literal_cor        = STRING ;
+referencia_token   = "$", nome_qualificado ;
+lista_valores      = "[", [ valor_estilo, { ",", valor_estilo } ], "]" ;
 ```
 
 ### 12.3 Valores
