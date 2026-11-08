@@ -155,3 +155,16 @@ As decisões de alto nível não determinam, por si só, cada token, produção 
 - matriz de compatibilidade e critérios quantitativos de desempenho.
 
 Essas pendências devem ser resolvidas em revisões técnicas rastreáveis. Exemplos neste estágio são ilustrativos e não podem ser tratados como sintaxe aprovada.
+
+
+---
+
+## 11. Decisão posterior de sintaxe básica — revisão da Fase 3
+
+Após a entrevista de 125 decisões, foi aprovada uma forma concreta de autoria para os seletores básicos:
+
+- `.nome: { ... }` identifica seletor de classe;
+- `nome: { ... }` identifica seletor de elemento;
+- declarações internas usam `propriedade: valor;`.
+
+Esta decisão posterior complementa as decisões de alto nível da Fase 2 e prevalece sobre exemplos anteriores que usavam `estilo(seletor.elemento(...))` como forma principal. A gramática revisada está em [GRAMATICA-NSL-FASE-3.md](GRAMATICA-NSL-FASE-3.md). A sintaxe funcional anterior fica registrada como proposta histórica, não como sintaxe canônica aprovada.
