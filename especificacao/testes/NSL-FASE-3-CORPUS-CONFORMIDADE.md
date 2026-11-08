@@ -67,9 +67,9 @@ O corpus deve ser executado em modo unitário, integração, regressão e fuzzin
 | SYN-P-004 | Constante | `constante espacamento = 8;` | AST de constante |
 | SYN-P-005 | Variável | `variavel largura = 320;` | AST de variável |
 | SYN-P-006 | Função | `funcao calcular(x: Numero): Numero { retorne x; }` | AST de função |
-| SYN-P-007 | Estilo | `estilo(seletor.elemento("button")) { cor(cor.hex("#fff")); }` | AST de regra e declaração visual |
-| SYN-P-008 | Seletor de classe | `seletor.classe("botaoPrincipal")` | AST de seletor de classe |
-| SYN-P-009 | Seletor composto | `seletor.descendente(seletor.elemento("main"), seletor.classe("titulo"))` | AST relacional |
+| SYN-P-007 | Regra direta | `.botao: { cor: "#fff"; }` | AST de regra e declaração visual |
+| SYN-P-008 | Seletor de classe | `.botaoPrincipal: { cor: "#fff"; }` | AST de seletor de classe |
+| SYN-P-009 | Seletor descendente | `main .titulo: { cor: "#fff"; }` | AST relacional |
 | SYN-P-010 | Lista | `[1, 2, 3]` | AST de lista |
 | SYN-P-011 | Argumento nomeado | `funcaoX(valor = 10)` | AST de chamada com argumento nomeado |
 | SYN-P-012 | Tipo composto | Tipo de união e tipo genérico conforme gramática | AST tipada |
@@ -99,7 +99,7 @@ O corpus deve ser executado em modo unitário, integração, regressão e fuzzin
 | SYN-N-013 | Indentação divergente | Linhas irmãs com largura inconsistente | Rejeitar |
 | SYN-N-014 | Mistura de tabs e espaços | Mistura no mesmo nível | Rejeitar |
 | SYN-N-015 | Fechamento desalinhado | Chave de fechamento em coluna incompatível | Rejeitar |
-| SYN-N-016 | Seletor vazio | `estilo() { }` | Rejeitar |
+| SYN-N-016 | Seletor funcional legado vazio | `estilo() { }` | Rejeitar no perfil 0.2.0 |
 | SYN-N-017 | Tipo ausente | Anotação `:` sem tipo | Rejeitar |
 | SYN-N-018 | Declaração incompleta | `constante x = ;` | Rejeitar e recuperar |
 
@@ -218,3 +218,6 @@ Este adendo substitui todos os casos positivos antigos que usam a forma funciona
 Casos específicos devem verificar espaço descendente entre seletores, espaços de formatação em valores, quebra dentro de delimitadores, comentários entre tokens, e que espaço antes/depois de dois-pontos ou ponto e vírgula nunca cria combinador. O mesmo arquivo deve produzir a mesma sequência de tokens e AST em execuções repetidas.
 
 **Estado:** corpus alinhado documentalmente à sintaxe direta; não executado.
+
+
+**Correção de precedência:** os casos SYN-P-007 a SYN-P-009 acima estão substituídos por sintaxe direta. Nenhum caso positivo deste corpus pode usar a sintaxe funcional 0.1.x. Os exemplos antigos são inválidos no perfil 0.2.0.
