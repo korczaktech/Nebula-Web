@@ -1,13 +1,16 @@
 
 
 //variaveis declaradas para inicio da classe
-
+variavel tipos: texto = nulo
+variavel valor: texto = nulo
+variavel final: inteiro_u64 = nulo
+variavel inicio: inteiro_u64 = nulo
 
 classe Token: {
     funcao construtor(tipos: texto, valor: texto, final: inteiro_u64, inicio: inteiro_u64): {
         isto.tipos = tipos
         isto.valor = valor
         isto.inicio = inicio
-        isto.final = final
+        isto.final = fim
     }
 }

@@ -1,0 +1,11 @@
+//variaveis para declarar na classe
+
+variavel fonteNML: texto = nulo
+variavel posicaoAtual: texto = nulo
+
+classe Scanner: {
+    publico funcao(fonteNML: texto, posicaoAtual: texto): {
+        isto.fonteNML = fonteNML
+        isto.posicaoAtual = posicaoAtual
+    }
+}
