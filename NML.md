@@ -981,3 +981,10 @@ A proposta documental da primeira versão está consolidada nos seguintes docume
 Esses documentos formalizam a proposta estática NML 0.1.0 e preservam as decisões aprovadas: regiões principais opcionais, aninhamento livre e conteúdo textual explícito por `texto`.
 
 **Estado:** especificação documental elaborada em draft; revisão formal e execução do corpus ainda pendentes. Lexer, parser, AST em código, compilador e geração HTML não são declarados implementados.
+
+
+## Estado normativo NML 0.1.0
+
+A propriedade texto é um identificador léxico comum, não uma palavra reservada global. Seu tratamento especial ocorre semanticamente quando usada como propriedade de um elemento. String vazia é válida; texto e filhos só coexistem em elementos cujo catálogo declare conteúdo misto. As regras completas de tokens, layout, valores, regiões e conteúdo estão em especificacao/NML-FASE-3-LEXICO-E-SINTAXE.md, especificacao/GRAMATICA-NML-FASE-3.md e especificacao/NML-MODELO-SEMANTICO-E-AST.md.
+
+**Próxima etapa:** implementar o lexer NML em Nebula. A especificação não significa que lexer/parser estejam implementados ou que o corpus tenha sido executado.
