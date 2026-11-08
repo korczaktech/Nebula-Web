@@ -175,3 +175,46 @@ A partir da revisão 0.2.0, os casos básicos obrigatórios incluem:
 | NSL-DIR-N-003 | nome de propriedade desconhecido | erro semântico |
 
 Os exemplos antigos de sintaxe funcional permanecem somente como histórico de proposta e não podem ser usados como casos positivos da gramática 0.2.0.
+
+
+## 11. Adendo normativo final — NSL 0.2.0
+
+Este adendo substitui todos os casos positivos antigos que usam a forma funcional de regra ou propriedade. A entrada funcional antiga é sempre negativa no perfil 0.2.0.
+
+### 11.1 Casos positivos obrigatórios
+
+| ID | Entrada | Resultado esperado |
+|---|---|---|
+| NSL-DIR-P-001 | `.nome: { cor: "#fff"; }` | regra de classe |
+| NSL-DIR-P-002 | `botao: { cor: "#fff"; }` | regra de elemento |
+| NSL-DIR-P-003 | `#acao: { opacidade: 1; }` | regra de id |
+| NSL-DIR-P-004 | `main .titulo: { tamanhoFonte: 16px; }` | relação descendente |
+| NSL-DIR-P-005 | `main > .titulo: { tamanhoFonte: 16px; }` | filho direto |
+| NSL-DIR-P-006 | `.a, .b: { cor: "red"; }` | grupo de seletores |
+| NSL-DIR-P-007 | `.x[ativo="sim"]: { cor: "red"; }` | atributo |
+| NSL-DIR-P-008 | `.x:hover: { cor: "red"; }` | estado |
+| NSL-DIR-P-009 | `.x::parte: { cor: "red"; }` | parte |
+| NSL-DIR-P-010 | `.x: { largura: 10px; duracao: 200ms; angulo: 1turn; }` | unidades tipadas |
+| NSL-DIR-P-011 | `.x: { fundo: $tema.corDestaque; }` | referência a token |
+| NSL-DIR-P-012 | `.x: { largura: soma(2px, 3px); }` | chamada de função catalogada |
+
+### 11.2 Casos negativos obrigatórios
+
+| ID | Entrada/condição | Resultado esperado |
+|---|---|---|
+| NSL-DIR-N-001 | `estilo(seletor.elemento("x")) { ... }` | rejeitar sintaxe funcional histórica |
+| NSL-DIR-N-002 | `cor("#fff");` como declaração | rejeitar chamada funcional de propriedade |
+| NSL-DIR-N-003 | `.x { cor: "red"; }` | rejeitar: dois-pontos após seletor obrigatório |
+| NSL-DIR-N-004 | declaração `cor: "red"` sem `;` | erro sintático |
+| NSL-DIR-N-005 | `.x: { largura: 2foo; }` | erro lexical de unidade desconhecida |
+| NSL-DIR-N-006 | `.x: { largura: 2s; }` | erro semântico de dimensão |
+| NSL-DIR-N-007 | `.x: { cor: !important; }` | rejeitar marcador de prioridade não definido |
+| NSL-DIR-N-008 | seletor incompleto ou combinador sem operando | erro sintático |
+| NSL-DIR-N-009 | propriedade duplicada não acumulável | erro semântico |
+| NSL-DIR-N-010 | chamada de função não catalogada | erro de resolução |
+
+### 11.3 Espaços e desambiguação
+
+Casos específicos devem verificar espaço descendente entre seletores, espaços de formatação em valores, quebra dentro de delimitadores, comentários entre tokens, e que espaço antes/depois de dois-pontos ou ponto e vírgula nunca cria combinador. O mesmo arquivo deve produzir a mesma sequência de tokens e AST em execuções repetidas.
+
+**Estado:** corpus alinhado documentalmente à sintaxe direta; não executado.
