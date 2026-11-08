@@ -138,3 +138,36 @@ A saída CSS preserva semântica NSL quando houver mapeamento fiel. Recursos sem
 ## 12. Segurança
 
 Seletores não atravessam escopos isolados sem contrato. Valores não confiáveis não geram CSS executável ou URLs perigosas. Recursos externos respeitam políticas do navegador. NSL não concede acesso a hardware/syscalls; integração ZenithOS só existe no adaptador autorizado Portunus/kernel.
+
+
+## 13. Fechamento normativo da cascata e dos valores 0.2.0
+
+### 13.1 Especificidade
+
+Especificidade é tupla lexicográfica (a,b,c): a conta IDs; b conta classes, atributos e estados; c conta elementos e partes. Universal e combinadores não contam. Em grupos, cada ramo conserva sua tupla. Pseudoclasses funcionais seguem regra fixa: :is(), :not() e :has() recebem a maior especificidade de seus argumentos; :where() recebe zero; estados sem argumento contam como classe. Não há dupla contagem de argumentos.
+
+### 13.2 Ordem total da cascata
+
+Para declarações normais, resolver da menor para maior precedência pela sequência: origem (agente, biblioteca, autor); camada (ordem declarada; não declaradas após declaradas, pela primeira aparição); especificidade; proximidade do escopo (local, componente, módulo, global); condição aplicável; ordem de origem. O último critério desempata. A ordem é total e determinística.
+
+O núcleo 0.2.0 não possui declarações importantes nem marcador de prioridade. Portanto não existe conflito entre prioridade e especificidade nesta versão. Uma futura prioridade importante exige tabela separada e compatibilidade CSS formal antes de ser aceita.
+
+### 13.3 Herança
+
+Toda propriedade do catálogo declara explicitamente um dos modos: herdada, não herdada, herdada no escopo ou calculada pelo runtime. Se não houver declaração no catálogo, a propriedade é inválida; não existe herança padrão inferida. `inicial`, `herdado`, `reverter` e `nulo` são valores semânticos distintos e só são aceitos se a propriedade os suportar.
+
+### 13.4 Unidades e dimensões
+
+Unidades normativas: comprimento absoluto px, cm, mm, in, pt, pc; comprimento relativo em, rem, ex, ch, vw, vh, vmin, vmax e %; tempo ms e s; ângulo deg, rad, grad e turn; resolução dpi, dpcm e dppx. Soma/subtração exigem dimensões compatíveis. Multiplicação/divisão seguem álgebra dimensional. Conversões entre unidades relativas exigem contexto de layout. Unidade desconhecida é erro léxico; unidade conhecida em propriedade incompatível é erro semântico.
+
+### 13.5 Valores e funções
+
+Valores são literais tipados, medidas, cores, listas, referências a token e chamadas de funções de valor registradas. A gramática de expressão do núcleo é aritmética restrita; não incorpora expressão Nebula arbitrária. Funções devem declarar aridade, tipos, efeitos e determinismo.
+
+### 13.6 AST e histórico
+
+AST normativa representa seletores diretos como nós Element, Class, Id, Attribute, State, Part, Universal, Group e Relation. Declarações são PropertyDeclaration com ValueNode e span. Nós de seletor funcional antigos podem existir somente em ferramenta de migração, nunca na AST canônica 0.2.0.
+
+### 13.7 Prioridade do documento
+
+Este adendo substitui qualquer trecho anterior que deixe a ordem da cascata, herança, unidades ou prioridade em aberto. Não declara implementação ou testes executados.
