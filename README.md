@@ -224,6 +224,13 @@ O repositório possui estrutura arquitetural inicial e documentação de requisi
 - [Formalização léxica e sintática da Fase 3 da NSL](especificacao/NSL-FASE-3-LEXICO-E-SINTAXE.md)
 - [Gramática EBNF inicial da NSL](especificacao/GRAMATICA-NSL-FASE-3.md)
 - [Corpus de conformidade planejado da NSL](especificacao/testes/NSL-FASE-3-CORPUS-CONFORMIDADE.md)
+- [Léxico e sintaxe da Fase 3 da NML](especificacao/NML-FASE-3-LEXICO-E-SINTAXE.md)
+- [Gramática EBNF da NML](especificacao/GRAMATICA-NML-FASE-3.md)
+- [Modelo semântico e AST da NML](especificacao/NML-MODELO-SEMANTICO-E-AST.md)
+- [Modelo semântico e AST da NSL](especificacao/NSL-MODELO-SEMANTICO-E-AST.md)
+- [Contratos NML–NSL–Nebula](especificacao/CONTRATOS-NML-NSL-NEBULA.md)
+- [Diagnósticos e recuperação](especificacao/DIAGNOSTICOS-E-RECUPERACAO.md)
+- [Corpus de integração NML–NSL–Nebula](especificacao/testes/INTEGRACAO-NML-NSL-NEBULA-CORPUS.md)
 - [Contribuição](CONTRIBUTING.md)
 
 ## Contribuição
