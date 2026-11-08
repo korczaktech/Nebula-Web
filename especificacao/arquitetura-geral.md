@@ -17,3 +17,12 @@ Todo código-fonte próprio deve ser escrito em Nebula. Formatos declarativos, w
 
 ## Portabilidade
 O núcleo não pode depender de ZenithOS. Recursos específicos do ZenithOS ficam isolados no adaptador correspondente.
+
+
+---
+
+## Contratos de fronteira NML–NSL–Nebula
+
+A separação das linguagens é mantida em todos os estágios: NML e NSL possuem frontends, ASTs, semânticas e diagnósticos próprios. A integração ocorre por catálogo tipado de elementos/componentes, referências de estilo, classes, ids, estados, propriedades e nós de expressão Nebula explicitamente autorizados.
+
+A especificação detalhada está em [CONTRATOS-NML-NSL-NEBULA.md](CONTRATOS-NML-NSL-NEBULA.md). O formato comum de diagnósticos e recuperação está em [DIAGNOSTICOS-E-RECUPERACAO.md](DIAGNOSTICOS-E-RECUPERACAO.md). Esses contratos são documentação draft e não comprovam implementação.
