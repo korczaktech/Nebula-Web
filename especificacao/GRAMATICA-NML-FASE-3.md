@@ -70,7 +70,7 @@ bloco_estilo         = ":", "{", QUEBRA, { referencia_estilo | QUEBRA }, "}" ;
 referencia_estilo    = "importar", STRING, QUEBRA ;
 ```
 
-`TOKEN_NSL_OPACO` é uma região delimitada pelo contrato de integração e encaminhada ao frontend NSL independente. A forma de delimitação de NSL embutida fica reservada; a referência a arquivo externo é suportada.
+Somente referências a arquivos NSL externos são aceitas no núcleo 0.1. Conteúdo NSL embutido fica reservado até que exista delimitador explícito e testável; não há token opaco sem regra léxica.
 
 ## 6. Comentários e tokens
 
