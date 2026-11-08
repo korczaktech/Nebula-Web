@@ -389,8 +389,6 @@ lista_valores      = "[", [ valor_estilo, { ",", valor_estilo } ], "]" ;
 ```ebnf
 valor_estilo       = literal | medida | referencia_token
                    | lista_valores | chamada_valor | expressao ;
-lista_valores      = "[", [ valor_estilo, { ",", valor_estilo } ], "]" ;
-referencia_token   = "$", nome_qualificado ;
 chamada_valor      = nome_qualificado, "(", [ lista_argumentos ], ")" ;
 ```
 
