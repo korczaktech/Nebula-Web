@@ -18,7 +18,8 @@ arquivo              = { QUEBRA }, [ cabecalho_documento ], { QUEBRA },
 
 cabecalho_documento  = "documento", "NML", ":", "linguagem", ":",
                        lista_linguagens, QUEBRA ;
-lista_linguagens     = IDENT, { ",", IDENT } ;
+lista_linguagens     = nome_linguagem, { ",", nome_linguagem } ;
+nome_linguagem       = "NML" | "NSL" | "Nebula" | IDENT ;
 
 declaracao_raiz      = regiao_principal | regiao_auxiliar
                      | declaracao_extensao ;
