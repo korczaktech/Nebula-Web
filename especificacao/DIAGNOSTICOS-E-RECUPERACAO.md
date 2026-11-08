@@ -91,3 +91,46 @@ Códigos, severidades padrão e intervalos devem ser reproduzíveis para a mesma
 ## 8. Critério de aceitação
 
 Cada regra de erro da gramática e da semântica deve apontar para um código. O corpus positivo/negativo deve verificar os códigos e intervalos esperados. Este contrato é documentação; nenhuma implementação de diagnósticos é declarada concluída.
+
+
+## 9. Matriz mínima de rastreabilidade
+
+| Código | Condição normativa | Fase |
+|---|---|---|
+| NML-L-0001 | UTF-8 inválido | codificação |
+| NML-L-0002 | identificador/caractere inválido | léxico |
+| NML-L-0003 | string/escape inválido | léxico |
+| NML-S-0001 | delimitador/bloco inválido | sintaxe |
+| NML-S-0002 | indentação/tab inválida | layout |
+| NML-S-0003 | propriedade/valor ausente | sintaxe |
+| NML-R-0001 | elemento desconhecido | resolução |
+| NML-R-0002 | propriedade desconhecida | resolução |
+| NML-R-0003 | região duplicada | semântica |
+| NML-R-0004 | documento sem conteúdo renderizável | semântica/aviso |
+| NML-T-0001 | tipo de propriedade incompatível | tipos |
+| NML-T-0002 | modelo de conteúdo violado | semântica |
+| NML-T-0003 | propriedade/chave duplicada | semântica |
+| NSL-L-0001 | caractere/UTF-8 inválido | codificação/léxico |
+| NSL-L-0002 | string/número inválido | léxico |
+| NSL-L-0003 | unidade desconhecida | léxico |
+| NSL-S-0001 | seletor/bloco malformado | sintaxe |
+| NSL-S-0002 | declaração sem ponto e vírgula | sintaxe |
+| NSL-S-0003 | indentação inválida | layout |
+| NSL-R-0001 | seletor não resolvido/inválido | resolução |
+| NSL-R-0002 | propriedade/função desconhecida | resolução |
+| NSL-T-0001 | valor incompatível com tipo/domínio | tipos |
+| NSL-T-0002 | operação dimensional inválida | tipos |
+| NSL-C-0001 | conflito de cascata/escopo | cascata |
+| INT-0001 | referência NML–NSL não resolvida | integração |
+| INT-0002 | versão/contrato incompatível | integração |
+| INT-0003 | expressão Nebula não autorizada | integração |
+
+Um código pode ter subcódigos estáveis por causa específica, mas não pode mudar de significado. Corpus deve verificar código, fase, severidade e span, não apenas mensagem.
+
+## 10. Regras de recuperação e sucesso
+
+O lexer deve avançar ao menos um escalar Unicode válido ou consumir a sequência inválida mínima após erro, evitando loop infinito. Tokens ERRO preservam intervalo original. Parser sincroniza em quebras lógicas, delimitadores de fechamento e inícios de declaração. Recuperação nunca transforma arquivo inválido em compilação válida. Qualquer erro lexical, sintático, semântico ou de integração impede a marcação de sucesso; AST parcial é permitida somente para editor/LSP.
+
+## 11. Estado
+
+Esta matriz fecha o contrato documental mínimo. A implementação de códigos, recuperação e source maps permanece pendente e deverá ser verificada pelo corpus.
