@@ -822,3 +822,22 @@ Esse seletor corresponde aos elementos identificados pelo nome/tipo `nome`.
 Assim, `.nome` e `nome` são construções semanticamente distintas: classe e elemento, respectivamente.
 
 **Limite de formalização:** os exemplos registram a distinção aprovada, mas não fecham a gramática completa. Catálogo e tipagem de propriedades, valores, especificidade, cascata, herança, seletores compostos e regras de erro permanecem sujeitos à formalização. Não há declaração de implementação do lexer ou parser.
+
+
+---
+
+## 29. Formalização técnica e sintaxe direta
+
+A formalização NSL está organizada nos documentos:
+
+- [Decisões técnicas da Fase 2](especificacao/NSL-FASE-2-DECISOES.md).
+- [Léxico e sintaxe da Fase 3](especificacao/NSL-FASE-3-LEXICO-E-SINTAXE.md).
+- [Gramática EBNF da Fase 3](especificacao/GRAMATICA-NSL-FASE-3.md).
+- [Modelo semântico, tipos, seletores e AST](especificacao/NSL-MODELO-SEMANTICO-E-AST.md).
+- [Corpus de conformidade NSL](especificacao/testes/NSL-FASE-3-CORPUS-CONFORMIDADE.md).
+- [Diagnósticos e recuperação](especificacao/DIAGNOSTICOS-E-RECUPERACAO.md).
+- [Contratos NML–NSL–Nebula](especificacao/CONTRATOS-NML-NSL-NEBULA.md).
+
+A sintaxe básica de autoria aprovada é `.nome: { ... }` para seletor de classe e `nome: { ... }` para seletor de elemento. Declarações visuais usam `propriedade: valor;`. A revisão 0.2.0 da gramática registra essa forma e substitui exemplos funcionais anteriores como sintaxe canônica.
+
+**Estado:** especificação documental consolidada em draft; revisão formal e execução do corpus ainda pendentes. Lexer, parser, AST em código, cascata, compilador e geração CSS não são declarados implementados.
