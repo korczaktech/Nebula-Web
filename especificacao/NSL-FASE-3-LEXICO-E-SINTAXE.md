@@ -436,3 +436,31 @@ A existência deste documento não significa que lexer, parser, compilador ou ru
 - [Corpus de conformidade da Fase 3](testes/NSL-FASE-3-CORPUS-CONFORMIDADE.md).
 
 A gramática foi verificada estaticamente quanto a referências não definidas e produções duplicadas. Essa verificação documental não substitui a execução do corpus por lexer/parser de referência.
+
+
+---
+
+## 18. Revisão sintática 0.2.0 — seletores diretos
+
+A sintaxe básica aprovada pelo autor substitui a apresentação de seletores por chamadas funcionais nos exemplos anteriores:
+
+- seletor de classe: `.nome: { ... }`;
+- seletor de elemento: `nome: { ... }`;
+- declaração visual: `propriedade: valor;`.
+
+Exemplo:
+
+```nsl
+.nome: {
+    cor: "#ffffff";
+    tamanhoFonte: 16px;
+}
+
+botao: {
+    fundo: "#202020";
+}
+```
+
+A forma `estilo(seletor.elemento(...)) { ... }` documentada em exemplos anteriores é histórica e deixa de ser a sintaxe canônica de autoria. A gramática revisada na seção 12 de `GRAMATICA-NSL-FASE-3.md` é a referência para regras de seletores e declarações visuais.
+
+As extensões `#id`, seletores de atributo, relações, estados e partes são propostas técnicas complementares, não substituem as duas formas básicas aprovadas. A revisão continua draft até revisão formal e execução do corpus.
