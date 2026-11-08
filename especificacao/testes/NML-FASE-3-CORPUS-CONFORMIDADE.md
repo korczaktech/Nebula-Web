@@ -76,3 +76,27 @@ Testar arquivo vazio/grande, profundidade máxima, aninhamento extremo, comentá
 ## 6. Cobertura
 
 Toda produção EBNF tem caso positivo e toda regra de rejeição tem caso negativo. Todos os casos permanecem pendentes até execução por frontend de referência. Nenhum resultado é presumido.
+
+
+## 7. Adendo normativo final — NML 0.1.0
+
+Os casos abaixo são obrigatórios e substituem qualquer interpretação ambígua de casos anteriores:
+
+| ID | Entrada/condição | Resultado esperado |
+|---|---|---|
+| NML-TXT-P-001 | `texto: ""` | aceitar; TextValueNode vazio |
+| NML-TXT-P-002 | `texto: "abc"` | aceitar; texto literal |
+| NML-TXT-N-001 | `texto: 123` | erro de tipo |
+| NML-TXT-N-002 | segunda propriedade texto no mesmo elemento | erro de duplicidade |
+| NML-CONT-P-001 | elemento de conteúdo misto com texto e filho | aceitar e preservar ordem |
+| NML-CONT-N-001 | elemento de conteúdo texto com filho | erro estrutural |
+| NML-CONT-N-002 | elemento de conteúdo filhos com texto | erro estrutural |
+| NML-OBJ-N-001 | objeto com chave duplicada após NFC | erro semântico |
+| NML-OBJ-P-001 | lista vazia e objeto vazio | aceitar |
+| NML-LEX-N-006 | tentativa de tratar `texto` como palavra reservada global | lexer deve emitir IDENT |
+| NML-LEX-P-009 | cabeçalho com NML, NSL e Nebula | aceitar nomes no contexto do cabeçalho |
+| NML-LEX-P-010 | `texto` usado como nome comum fora de propriedade | emitir IDENT; resolução depende do contexto |
+
+Os casos anteriores de componente importado e catálogo são testes de integração semântica e exigem fixture de catálogo explícita. Não são testes do lexer isolado.
+
+**Estado:** corpus documental ampliado; não executado.
