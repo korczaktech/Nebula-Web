@@ -66,10 +66,8 @@ Referências não são executáveis; resolvem para recurso, símbolo ou módulo 
 ## 5. NSL referenciada ou embutida
 
 ```ebnf
-bloco_estilo         = ":", "{", QUEBRA, { declaracao_nsl | QUEBRA }, "}" ;
-declaracao_nsl       = referencia_estilo | conteudo_nsl_embutido ;
+bloco_estilo         = ":", "{", QUEBRA, { referencia_estilo | QUEBRA }, "}" ;
 referencia_estilo    = "importar", STRING, QUEBRA ;
-conteudo_nsl_embutido = TOKEN_NSL_OPACO ;
 ```
 
 `TOKEN_NSL_OPACO` é uma região delimitada pelo contrato de integração e encaminhada ao frontend NSL independente. A forma de delimitação de NSL embutida fica reservada; a referência a arquivo externo é suportada.
