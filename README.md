@@ -234,3 +234,26 @@ Consulte [CONTRIBUTING.md](CONTRIBUTING.md) antes de alterar arquitetura, especi
 ### Decisão de sintaxe inicial de NML e NSL
 
 As decisões iniciais aprovadas para regiões opcionais e aninhamento em NML, declaração explícita de texto e seletores de classe/elemento em NSL estão documentadas em [0003 — Sintaxe inicial de NML e NSL](especificacao/decisoes-arquiteturais/0003-sintaxe-inicial-nml-nsl.md).
+
+
+## Formalização das linguagens — Fase 3
+
+A primeira consolidação documental de NML e a revisão da sintaxe NSL estão em draft técnico. Os documentos definem léxico, gramática, AST, semântica, diagnósticos, corpus esperado e contratos de integração; não representam implementação nem testes executados.
+
+### NML
+- [Léxico e sintaxe](especificacao/NML-FASE-3-LEXICO-E-SINTAXE.md)
+- [Gramática EBNF](especificacao/GRAMATICA-NML-FASE-3.md)
+- [Modelo semântico e AST](especificacao/NML-MODELO-SEMANTICO-E-AST.md)
+- [Corpus de conformidade](especificacao/testes/NML-FASE-3-CORPUS-CONFORMIDADE.md)
+
+### NSL
+- [Léxico e sintaxe](especificacao/NSL-FASE-3-LEXICO-E-SINTAXE.md)
+- [Gramática EBNF](especificacao/GRAMATICA-NSL-FASE-3.md)
+- [Modelo semântico e AST](especificacao/NSL-MODELO-SEMANTICO-E-AST.md)
+- [Corpus de conformidade](especificacao/testes/NSL-FASE-3-CORPUS-CONFORMIDADE.md)
+
+### Contratos compartilhados
+- [Contratos NML–NSL–Nebula](especificacao/CONTRATOS-NML-NSL-NEBULA.md)
+- [Diagnósticos e recuperação](especificacao/DIAGNOSTICOS-E-RECUPERACAO.md)
+
+**Regra de status:** documentos em draft não autorizam marcar a Fase 3 como aprovada; isso exige revisão normativa. A implementação em Nebula e a execução dos corpora são etapas posteriores.
