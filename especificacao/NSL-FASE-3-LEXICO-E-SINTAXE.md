@@ -1,7 +1,7 @@
 # NSL — Fase 3: formalização léxica e sintática
 
-**Estado:** proposta técnica consolidada para revisão e testes  
-**Versão:** 0.1.0-draft  
+**Estado:** sintaxe direta consolidada para implementação do lexer  
+**Versão:** 0.2.0-draft  
 **Base:** decisões aprovadas nas Fases 1 e 2 e nos lotes 1–3 da Fase 3  
 **Idioma das palavras reservadas:** português brasileiro  
 **Nomenclatura de identificadores:** `camelCase` como padrão  
@@ -27,7 +27,7 @@
 
 ### 1.2 Lote 2 — forma concreta
 
-- A forma de uma declaração visual é funcional: `propriedade(valor);`.
+- A forma funcional `propriedade(valor);` foi uma proposta histórica 0.1.x e não pertence à sintaxe canônica 0.2.0.
 - As demais estruturas terão sintaxe própria, integrada e não serão cópias diretas de CSS.
 - Seletores combinarão elementos, classes, identificadores, atributos, estados e relações.
 - Propriedades e funções terão nomes em português como padrão, com aliases configuráveis para interoperabilidade.
@@ -43,7 +43,7 @@ O usuário confirmou opção 4 para todas as decisões do lote. Isso reafirma os
 As grafias concretas abaixo são decisões editoriais técnicas para tornar a gramática testável. Foram escolhidas para:
 - priorizar português sem acentos em palavras reservadas, facilitando digitação e portabilidade;
 - preservar os nomes originais de elementos e APIs externas quando exigido pela plataforma;
-- manter chamadas de propriedade no formato funcional aprovado;
+- usar declarações diretas `propriedade: valor;`;
 - usar chaves para delimitar blocos e exigir indentação consistente;
 - permitir análise léxica determinística sem depender de heurísticas frágeis.
 
@@ -195,7 +195,7 @@ fallback prioridade camada origem densidade responsivo
 
 ## 8. Forma funcional de propriedades
 
-A forma aprovada para uma declaração de propriedade é:
+A forma funcional abaixo é histórica e rejeitada pelo perfil canônico 0.2.0:
 
 ```nsl
 cor(cor.hex("#3366cc"));
@@ -464,3 +464,28 @@ botao: {
 A forma `estilo(seletor.elemento(...)) { ... }` documentada em exemplos anteriores é histórica e deixa de ser a sintaxe canônica de autoria. A gramática revisada na seção 12 de `GRAMATICA-NSL-FASE-3.md` é a referência para regras de seletores e declarações visuais.
 
 As extensões `#id`, seletores de atributo, relações, estados e partes são propostas técnicas complementares, não substituem as duas formas básicas aprovadas. A revisão continua draft até revisão formal e execução do corpus.
+
+
+## 17. Consolidação normativa 0.2.0 — prevalência
+
+Esta seção e a seção 18 substituem integralmente as seções antigas que descrevem chamadas funcionais de propriedades, seletores construídos por chamadas ou regras `estilo(...)`. Exemplos dessas seções são históricos e não podem ser usados como entrada positiva no corpus 0.2.0.
+
+### 17.1 Tokens lexicais definitivos
+
+O lexer emite IDENT, PALAVRA_RESERVADA, STRING, STRING_MULTILINHA, NUMERO, UNIDADE, QUEBRA, INDENTACAO, DEDENTACAO, ESPACO_TRIVIA, ESPACO_SELETOR, delimitadores, operadores, COMENTARIO, ERRO e EOF. ESPACO_SELETOR é contextual: só representa o combinador descendente entre seletores completos. Espaço dentro de declarações e valores permanece trivia.
+
+### 17.2 Unidades reconhecidas
+
+Comprimento: px, cm, mm, in, pt, pc, em, rem, ex, ch, vw, vh, vmin, vmax e %. Tempo: ms e s. Ângulo: deg, rad, grad e turn. Resolução: dpi, dpcm e dppx. A unidade deve seguir imediatamente o número. Sufixo desconhecido após número é erro lexical; unidade reconhecida com dimensão incompatível é erro semântico.
+
+### 17.3 Expressões de valor
+
+O núcleo aceita literais, medidas, listas, referências a token ($nome.qualificado), chamadas de funções do catálogo e expressões aritméticas/logicais definidas pela gramática. Não aceita código Nebula arbitrário. Chamadas de valor só são válidas se o símbolo existir no catálogo ou import autorizado.
+
+### 17.4 Prioridade
+
+A versão 0.2.0 não define marcador de prioridade na fonte. Todas as declarações são normais. `!important` e equivalentes são rejeitados até uma versão que defina sintaxe, cascata e interoperabilidade completas.
+
+### 17.5 Critério de prontidão
+
+A sintaxe direta é a única forma canônica para o lexer. A especificação permanece draft até revisão do corpus e implementação. Nenhum exemplo funcional antigo representa sintaxe válida 0.2.0.
