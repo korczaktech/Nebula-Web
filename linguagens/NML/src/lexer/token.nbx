@@ -1,0 +1,13 @@
+
+
+//variaveis declaradas para inicio da classe
+
+
+classe Token: {
+    funcao construtor(tipos: texto, valor: texto, final: inteiro_u64, inicio: inteiro_u64): {
+        isto.tipos
+        isto.valor
+        isto.inicio
+        isto.final
+    }
+}
