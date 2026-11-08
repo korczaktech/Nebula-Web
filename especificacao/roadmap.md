@@ -60,6 +60,8 @@ A documentação inicial de formalização foi elaborada, mas ainda está em rev
 
 ### Integração e qualidade documental
 - [x] Contratos NML–NSL–Nebula documentados.
+- [x] Corpus de integração NML–NSL–Nebula especificado.
+- [x] Códigos e envelope de diagnósticos documentados.
 - [x] Envelope comum de diagnósticos e recuperação documentado.
 - [ ] Testes de integração executados.
 - [ ] Source maps ponta a ponta implementados e validados.
