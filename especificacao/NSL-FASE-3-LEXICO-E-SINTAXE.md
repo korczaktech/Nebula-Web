@@ -25,7 +25,7 @@
 - Erros terão localização precisa, contexto, recuperação, sugestões e diagnósticos múltiplos.
 - Ferramentas externas terão integração completa por protocolos e formatos documentados.
 
-### 1.2 Lote 2 — forma concreta
+### 1.2 Lote 2 — decisões históricas de forma concreta
 
 - A forma funcional `propriedade(valor);` foi uma proposta histórica 0.1.x e não pertence à sintaxe canônica 0.2.0.
 - As demais estruturas terão sintaxe própria, integrada e não serão cópias diretas de CSS.
@@ -36,7 +36,7 @@
 
 ### 1.3 Lote 3 — semântica e execução
 
-O usuário confirmou opção 4 para todas as decisões do lote. Isso reafirma os requisitos completos de compilação e execução incremental, reatividade, tipos, validação, componentes, composição, segurança, interoperabilidade, backends, integração controlada com ZenithOS/Portunus, extensibilidade, governança e maturidade de produção. Essas confirmações não são evidência de implementação.
+O usuário confirmou opção 4 para todas as decisões do lote. Isso reafirma os requisitos completos de compilação e execução incremental, reatividade, tipos, validação, componentes, composição, segurança, interoperabilidade, backends, integração controlada com ZenithOS/Portunus, extensibilidade, governança e maturidade de produção. Essas confirmações não são evidência de implementação. As escolhas de sintaxe funcional do lote 2 são históricas e foram substituídas pela decisão posterior de sintaxe direta 0.2.0.
 
 ## 2. Convenções desta proposta
 
